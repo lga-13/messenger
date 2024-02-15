@@ -6,13 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "devDependencies": {
-    "vite": "^5.0.8"
+    "vite": "^5.1.0"
   },
   "dependencies": {
-    "sass": "^1.70.0",
+    "express": "^4.18.2",
     "vite-plugin-handlebars": "^2.0.0"
-  }
+  },
+  "description": "Ссылка на макеты - https://www.figma.com/file/xdOf7R3w9O2uHnrRnHNGn7/Messanger?type=design&node-id=0%3A1&mode=design&t=xUSXEwDNhaDuuVya-1",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
 }
