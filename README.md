@@ -19,5 +19,4 @@ HTML, CSS, Vite, Handlebars(plugin Vite), Node.js
 ``` npm install ```
 ``` npm run dev ```
 ### Команды для запуска prod-версии
-``` npm run build ```
 ``` npm run start ```
