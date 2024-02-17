@@ -5,26 +5,10 @@
     <form class="registration-form">
         <h2 class="registration-form__title">Регистрация</h2>
 
-        <label class="registration-form__label" for="email">Почта</label>
-        <input class="registration-form__input" type="text" id="email" placeholder="">
-
-        <label class="registration-form__label" for="login">Пароль</label>
-        <input class="registration-form__input" type="text" id="login" placeholder="">
-
-        <label class="registration-form__label" for="first-name">Имя</label>
-        <input class="registration-form__input" type="text" id="first-name" placeholder="">
-
-        <label class="registration-form__label" for="second-name">Фамилия</label>
-        <input class="registration-form__input" type="text" id="second-name" placeholder="">
-
-        <label class="registration-form__label" for="phone">Телефон</label>
-        <input class="registration-form__input" type="text" id="phone" placeholder="">
-
-        <label class="registration-form__label" for="password">Пароль</label>
-        <input class="registration-form__input" type="text" id="password" placeholder="">
-
-        <label class="registration-form__label" for="repeat password">Повторите пароль</label>
-        <input class="registration-form__input" type="text" id="repeat password" placeholder="">
+        {{#each registration}}
+        <label class="registration-form__label" for="{{this.name}}">{{this.nameru}}</label>
+        <input class="registration-form__input" type="text" id="{{this.name}}" placeholder="">
+        {{/each}}
 
         <button class="registration-form__button" type="submit">Зарегистрироваться</button>
 
