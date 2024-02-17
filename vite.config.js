@@ -69,8 +69,74 @@ export default defineConfig({
                     sender: "Павел",
                     content: "Королевский питон (Python reg...",
                 }
+            ],
+            registration: [
+                {
+                    name: "email",
+                    nameru: "Почта",
+                },
+                {
+                    name: "login",
+                    nameru: "Логин",
+                },
+                {
+                    name: "first-name",
+                    nameru: "Имя",
+                },
+                {
+                    name: "second-name",
+                    nameru: "Фамилия",
+                },
+                {
+                    name: "phone",
+                    nameru: "Телефон",
+                },
+                {
+                    name: "password",
+                    nameru: "Пароль",
+                },
+                {
+                    name: "repeat password",
+                    nameru: "Повторите пароль",
+                }
+            ],
+            setting: [
+                {
+                    name: "login",
+                    nameru: "Логин",
+                    value: "VAlerA5",
+                },
+                {
+                    name: "first-name",
+                    nameru: "Имя",
+                    value: "Валерий",
+                },
+                {
+                    name: "second-name",
+                    nameru: "Фамилия",
+                    value: "Чижов",
+                },
+                {
+                    name: "email",
+                    nameru: "Почта",
+                    value: "valera@pa.fd",
+                },
+                {
+                    name: "phone",
+                    nameru: "Телефон",
+                    value: "88-987-2898",
+                }
+            ],
+            login: [
+                {
+                    name: "login",
+                    nameru: "Логин",
+                },
+                {
+                    name: "password",
+                    nameru: "Пароль",
+                }
             ]
-
         }
     })]
 })

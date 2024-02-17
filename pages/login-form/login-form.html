@@ -5,11 +5,10 @@
     <form class="login-form">
         <h2 class="login-form__title">Войти</h2>
 
-        <label class="login-form__label" for="login">Логин</label>
-        <input class="login-form__input" type="text" id="login" placeholder="">
-
-        <label class="login-form__label" for="password">Пароль</label>
-        <input class="login-form__input" type="text" id="password" placeholder="">
+        {{#each login}}
+        <label class="login-form__label" for="{{this.name}}">{{this.nameru}}</label>
+        <input class="login-form__input" type="text" id="{{this.name}}" placeholder="">
+        {{/each}}
 
         <a class="login-form__forgot-password" href="#">Забыли пароль?</a>
 
