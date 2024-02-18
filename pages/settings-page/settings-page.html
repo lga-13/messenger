@@ -8,7 +8,10 @@
 
             {{#each setting}}
                 <label class="settings__label" for="{{this.name}}">{{this.nameru}}</label>
-                <input class="settings__input" type="text" id="{{this.name}}" name="{{this.name}}" value="{{this.value}}" readonly>
+
+                <input class="settings__input" type="text" id="{{this.name}}"
+                       name="{{this.name}}" value="{{this.value}}" readonly>
+
                 <hr>
             {{/each}}
 
@@ -16,7 +19,9 @@
 
             <a class="settings__change-password" href="#">Сменить пароль</a>
 
-            <button class="settings__btn-back"><a href=""><img src="/public/static/img/btn-back.svg" alt="btn"></a></button>
+            <button class="settings__btn-back">
+                <a href=""><img src="/public/static/img/btn-back.svg" alt="btn"></a>
+            </button>
         </form>
 
         <div class="settings-window">
