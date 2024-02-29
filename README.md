@@ -20,3 +20,31 @@ HTML, CSS, Vite, Handlebars(plugin Vite), Node.js
 ``` npm run dev ```
 ### Команды для запуска prod-версии
 ``` npm run start ```
+
+
+### Установка линтера в проект
+```bash
+
+npm install --save-dev @typescript-eslint/parser
+npm install @typescript-eslint/eslint-plugin@latest --save-dev
+npm install --save-dev eslint-config-airbnb
+```
+
+
+Добавить в `.eslintrc.json`
+```json
+{
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "max-len": [2, 100],
+    "max-params": [2, 3]
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
+```
