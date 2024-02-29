@@ -48,3 +48,24 @@ npm install --save-dev eslint-config-airbnb
   }
 }
 ```
+
+### Установка линтера для css
+
+
+```bash
+npm install --save-dev stylelint 
+npm install --save-dev stylelint-config-standard
+```
+
+Добавить в `.stylelintrc.json`
+```json
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-hex-case": "lower"
+  },
+  "ignoreFiles": [
+    "build/*"
+  ]
+} 
+```
