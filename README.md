@@ -48,6 +48,10 @@ npm install --save-dev eslint-config-airbnb
   }
 }
 ```
+Запуск
+```
+node_modules/.bin/eslint . --fix 
+```
 
 ### Установка линтера для css
 
