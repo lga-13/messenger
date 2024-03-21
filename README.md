@@ -69,3 +69,8 @@ npm install --save-dev stylelint-config-standard
   ]
 } 
 ```
+
+Запуск
+```bash
+npx stylelint "**/*.css"
+```
