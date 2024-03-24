@@ -13,7 +13,6 @@ import render from '../../utils/render.ts';
 
 export const MOCK_MESSAGE_DATA = [
   {
-    srcName: chat2,
     index: 14658764747,
     sender: 'Мама',
     message_chain: [
@@ -37,7 +36,6 @@ export const MOCK_MESSAGE_DATA = [
       }],
   },
   {
-    srcName: chat2,
     index: 2343265678,
     sender: 'Папа',
     message_chain: [
@@ -73,61 +71,68 @@ export const MOCK_MESSAGE_DATA = [
       }],
   },
   {
-    srcName: chat2,
     index: 16565464623,
-    sender: 'Мама',
+    sender: 'Коля',
     message_chain: [
       {
         me: true,
-        text: 'Привет',
+        text: 'Здарова! Как дела?',
         time: new Date('2022-01-02T10:30:34'),
         read: true,
       },
     ],
   },
   {
-    srcName: chat2,
     index: 15655,
-    sender: 'Мама',
+    sender: 'Юлия Викторовна',
     message_chain: [
       {
         me: true,
-        text: 'Привет',
-        time: new Date('2022-01-02T10:30:34'),
+        text: 'Прошу приготовить отчет',
+        time: new Date('2024-03-24T15:00:34'),
         read: true,
+      },
+      {
+        me: false,
+        text: 'Ок!',
+        time: new Date('2024-03-24T16:23:34'),
+        read: false,
       },
     ],
   },
   {
-    srcName: chat2,
     index: 13,
-    sender: 'Мама',
+    sender: 'Сосед',
     message_chain: [
       {
         me: true,
-        text: 'Привет',
-        time: new Date('2022-01-02T10:30:34'),
+        text: 'ЗАйду?',
+        time: new Date('2024-03-24T22:30:00'),
+        read: true,
+      },
+      {
+        me: false,
+        text: 'Жду!',
+        time: new Date('2024-03-24T22:35:00'),
         read: true,
       },
     ],
   },
   {
-    srcName: chat2,
     index: 123,
-    sender: 'Мама',
+    sender: 'Денис Парикмахер',
     message_chain: [
       {
-        me: true,
-        text: 'Привет',
+        me: false,
+        text: 'Когда ждать?',
         time: new Date('2022-01-02T10:30:34'),
         read: true,
       },
     ],
   },
   {
-    srcName: chat2,
     index: 1233213123131,
-    sender: 'Мама',
+    sender: 'Альберт',
     message_chain: [
       {
         me: true,
@@ -138,39 +143,42 @@ export const MOCK_MESSAGE_DATA = [
     ],
   },
   {
-    srcName: chat2,
     index: 132323,
-    sender: 'Мама',
+    sender: 'Читстка мебели',
     message_chain: [
       {
-        me: true,
-        text: 'Привет',
-        time: new Date('2022-01-02T10:30:34'),
+        me: false,
+        text: 'ВНИМАНИЕ! Скидки для постоянных клиентов!',
+        time: new Date('2024-03-20T09:10:34'),
         read: true,
       },
     ],
   },
   {
-    srcName: chat2,
     index: 1000,
-    sender: 'Мама',
+    sender: 'Сестра',
     message_chain: [
       {
-        me: true,
-        text: 'Привет',
-        time: new Date('2022-01-02T10:30:34'),
+        me: false,
+        text: 'Привет! Поможешь с программированием?',
+        time: new Date('2024-03-23T11:57:34'),
         read: true,
+      },
+      {
+        me: true,
+        text: 'Ага!',
+        time: new Date('2024-03-23T11:57:34'),
+        read: false,
       },
     ],
   },
   {
-    srcName: chat2,
     index: 121211,
-    sender: 'Мама',
+    sender: 'Александр HR',
     message_chain: [
       {
-        me: true,
-        text: 'Привет',
+        me: false,
+        text: 'Предлагаю созвонитьтся',
         time: new Date('2022-01-02T10:30:34'),
         read: true,
       },
