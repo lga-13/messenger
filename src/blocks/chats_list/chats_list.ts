@@ -11,7 +11,7 @@ export interface ChatListBlockType
     }
 
 export default class ChatList extends Block {
-  userId: number;
+  userId?: number;
 
   constructor(props: ChatListBlockType) {
     // Созадние чат листа
