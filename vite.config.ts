@@ -1,4 +1,3 @@
-/* import/no-extraneous-dependencies */
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
