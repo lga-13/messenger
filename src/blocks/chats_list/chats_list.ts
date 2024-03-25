@@ -1,7 +1,7 @@
 import Block from '../../components/base/block.ts';
 import greetings from './chats_list-template.ts';
 import ChatMiniature from './chat_miniature/chat_miniature.ts';
-import {getChatsList, IDialogue, readMessageChain} from '../../pages/chat-page/chat-page.ts';
+import { getChatsList, IDialogue, readMessageChain } from '../../pages/chat-page/chat-page.ts';
 import TimeConverter from '../../modules/time_prepare/converter.ts';
 import RandomAvatar from '../../modules/random_avatar_generator/default_avatar_pool.ts';
 
