@@ -11,7 +11,6 @@ import Form from '../../blocks/form/form.ts';
 import './chat-page.css';
 import render from '../../utils/render.ts';
 
-
 interface IMessage {
   me: boolean;
   text: string;
@@ -24,7 +23,6 @@ export interface IDialogue {
   sender: string;
   message_chain: IMessage[];
 }
-
 
 export const MOCK_MESSAGE_DATA: IDialogue[] = [
   {
