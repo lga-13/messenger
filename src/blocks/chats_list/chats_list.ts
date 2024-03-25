@@ -10,8 +10,13 @@ export interface ChatListBlockType
         showMessageChain: (user_id: number) => void
     }
 
+
+
 export default class ChatList extends Block {
   userId?: number;
+  props: {
+    showMessageChain: (user_id: number) => void
+  }
 
   constructor(props: ChatListBlockType) {
     // Созадние чат листа
