@@ -11,7 +11,22 @@ import Form from '../../blocks/form/form.ts';
 import './chat-page.css';
 import render from '../../utils/render.ts';
 
-export const MOCK_MESSAGE_DATA = [
+
+interface IMessage {
+  me: boolean;
+  text: string;
+  time: Date;
+  read: boolean;
+}
+
+export interface IDialogue {
+  index: number;
+  sender: string;
+  message_chain: IMessage[];
+}
+
+
+export const MOCK_MESSAGE_DATA: IDialogue[] = [
   {
     index: 14658764747,
     sender: 'Мама',
@@ -190,7 +205,7 @@ MOCK_MESSAGE_DATA.forEach((chat) => {
   chat.message_chain.sort((a, b) => new Date(a.time) - new Date(b.time));
 });
 
-export function getChatsList() {
+export function getChatsList(): IDialogue {
   const sortChats = (chats) => chats.sort((a, b) => {
     const lastMessageTimeA = a.message_chain[a.message_chain.length - 1].time;
     const lastMessageTimeB = b.message_chain[b.message_chain.length - 1].time;

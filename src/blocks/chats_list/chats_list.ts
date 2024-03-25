@@ -1,7 +1,7 @@
 import Block from '../../components/base/block.ts';
 import greetings from './chats_list-template.ts';
 import ChatMiniature from './chat_miniature/chat_miniature.ts';
-import { getChatsList, readMessageChain } from '../../pages/chat-page/chat-page.ts';
+import {getChatsList, IDialogue, readMessageChain} from '../../pages/chat-page/chat-page.ts';
 import TimeConverter from '../../modules/time_prepare/converter.ts';
 import RandomAvatar from '../../modules/random_avatar_generator/default_avatar_pool.ts';
 
@@ -22,7 +22,7 @@ export default class ChatList extends Block {
 
   buildChatList(activeChat = null) {
     const chatList: ChatMiniature[] = [];
-    Object.values(getChatsList()).forEach((chat) => {
+    Object.values(getChatsList()).forEach((chat: IDialogue) => {
       let counter = 0;
       Object.values(chat.message_chain).forEach((message) => {
         if (!message.read && !message.me) {
