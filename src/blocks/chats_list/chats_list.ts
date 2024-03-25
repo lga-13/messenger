@@ -21,7 +21,7 @@ export default class ChatList extends Block {
   }
 
   buildChatList(activeChat = null) {
-    const chatList = [];
+    const chatList: ChatMiniature[] = [];
     Object.values(getChatsList()).forEach((chat) => {
       let counter = 0;
       Object.values(chat.message_chain).forEach((message) => {
