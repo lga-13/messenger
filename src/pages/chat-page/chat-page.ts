@@ -249,24 +249,29 @@ export function readMessageChain(index) {
   }
 }
 
-export default class ChatPage extends Block {
-  constructor(props: {
-    searchForm?: Form,
-    accountLink?: Link,
-    chatPlug?: Plug,
-    messageChain?: MessageChain,
-    chatsList?: ChatList,
-  }) {
-    // Генерация списка чатов
-    // Передаем функцию которая будет вызываться по клику миниатюры в чат листе для открытия чатов.
-    // Передаем функцию которая будет прочитывать все чаты при клике на миниматюру.
+interface chatPageBlockType{
 
+}
+
+export default class ChatPage extends Block {
+  declare children: {
+    searchForm: Form,
+    accountLink: Link,
+    chatPlug: Plug,
+    messageChain: MessageChain,
+    chatsList: ChatList,
+  };
+
+  constructor(props: chatPageBlockType) {
+    super('div', props);
+  }
+
+  addChildren() {
     const chatList = new ChatList({
       showMessageChain: (userId: number) => { this.showMessageChain(userId); },
     });
 
-    // Генерация месадж чейна и заглушки. По умолчанию скрыт месадж чейн.
-    props.messageChain = new MessageChain({
+    const messageChain = new MessageChain({
       srcName: chat2,
       sender_name: {
         className: 'message-chain-header-title',
@@ -281,11 +286,11 @@ export default class ChatPage extends Block {
           text: '',
           events: {
             click: () => {
-              if (props.messageChain.children.messageChainForm.validate()) {
-                const message = props.messageChain.children.messageChainForm.get_data();
-                addMessageChain(props.messageChain.props.user_id, message.message, new Date());
-                props.messageChain.setCurrentMessage(props.messageChain.props.user_id);
-                props.messageChain.children.messageChainForm.clear();
+              if (messageChain.children.messageChainForm.validate()) {
+                const message: {message: string} = messageChain.children.messageChainForm.get_data();
+                addMessageChain(messageChain.userId, message.message, new Date());
+                messageChain.setCurrentMessage(messageChain.userId);
+                messageChain.children.messageChainForm.clear();
               }
             },
             keydown: () => {},
@@ -315,11 +320,12 @@ export default class ChatPage extends Block {
         typeName: 'button',
         text: '',
       },
-      chatListHook: () => { chatList.update(props.messageChain.props.user_id); },
+      chatListHook: () => { chatList.update(messageChain.userId); },
     });
-    props.messageChain.hide();
+    this.children.messageChain = messageChain;
+    this.children.messageChain.hide();
 
-    props.chatPlug = new Plug({
+    const chatPlug = new Plug({
       className: 'chats-plug',
       plugLink: {
         className: 'chats-plug-message',
@@ -327,14 +333,16 @@ export default class ChatPage extends Block {
         text: 'Выберите чат, чтобы начать общаться.',
       },
     });
+    this.children.chatPlug = chatPlug;
 
-    props.accountLink = new Link({
+    const accountLink = new Link({
       className: 'chats-account',
       href: '/src/pages/settings-page/settings-page.html',
       text: 'Аккаунт',
     });
+    this.children.accountLink = accountLink;
 
-    props.searchForm = new Form(
+    const searchForm = new Form(
       {
         className: 'chats-search-box',
         button: {
@@ -343,8 +351,8 @@ export default class ChatPage extends Block {
           text: '',
           events: {
             click: () => {
-              if (props.searchForm.validate()) {
-                console.log(props.searchForm.get_data());
+              if (searchForm.validate()) {
+                console.log(searchForm.get_data());
               }
             },
           },
@@ -361,8 +369,9 @@ export default class ChatPage extends Block {
 
       },
     );
-    props.chatsList = chatList;
-    super('div', props);
+    this.children.searchForm = searchForm;
+
+    this.children.chatsList = chatList;
   }
 
   showMessageChain(userId: number) {

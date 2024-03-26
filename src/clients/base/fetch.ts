@@ -1,5 +1,5 @@
 export default class APIClient {
-  static request(method, url, body = null, params = null) {
+  static request(method: string, url: string, body = null, params = null) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       let constructedURL = url;
@@ -34,19 +34,19 @@ export default class APIClient {
     });
   }
 
-  static get(url, params) {
+  static get(url: string, params) {
     return APIClient.request('GET', url, null, params);
   }
 
-  static post(url, body) {
+  static post(url: string, body) {
     return APIClient.request('POST', url, body);
   }
 
-  static put(url, body) {
+  static put(url: string, body) {
     return APIClient.request('PUT', url, body);
   }
 
-  static delete(url, body) {
+  static delete(url: string, body) {
     return APIClient.request('DELETE', url, body);
   }
 }
