@@ -4,6 +4,7 @@ import Link, { LinkBlockType } from '../../components/link/link.ts';
 import Button, { buttonBlockType } from '../../components/button/button.ts';
 import Title, { TitleBlockType } from '../../components/title/title.ts';
 import Block from '../../components/base/block.ts';
+import { userDataInterface } from '../../pages/settings-page/settings-page.ts';
 
 export interface FormProps {
     className: string,
@@ -92,8 +93,8 @@ export default class Form extends Block {
   }
 
   // Метод возвращает даныне всех полей
-  get_data(): {string: string} {
-    const currentCondition = {};
+  get_data(): userDataInterface {
+    const currentCondition: userDataInterface = {};
 
     Object.values(this.children).forEach((child) => {
       if (child instanceof Array && child.every((item) => item instanceof Field)) {

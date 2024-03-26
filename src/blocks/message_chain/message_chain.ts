@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import greetings from './message_chain-template.ts';
 import Button, { buttonBlockType } from '../../components/button/button.ts';
 import Title, { TitleBlockType } from '../../components/title/title.ts';
@@ -11,7 +12,7 @@ import DateComparator from '../../modules/time_prepare/dateComparator.ts';
 
 export interface MessageChainBlockType {
 
-    srcName: Record<string, never>
+    srcName: any
     sender_name: TitleBlockType,
     messageForm: FormProps,
     attachmentButton: buttonBlockType,
