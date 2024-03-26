@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import './settings-page.css';
 import './change-data-form.css';
 import './change-password-form.css';
@@ -14,7 +15,15 @@ import { UserInfoCard } from '../../blocks/user_info_card/user_info_card.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
 import render from '../../utils/render.ts';
 
-let MOCK_USER_DATA = {
+export interface userDataInterface {
+  login: string,
+  first_name: string,
+  second_name: string,
+  email: string,
+  phone: string
+}
+
+let MOCK_USER_DATA: userDataInterface = {
   login: 'admin',
   first_name: 'Глеб',
   second_name: 'Лазарев',
@@ -26,31 +35,37 @@ export function getUserData() {
   return MOCK_USER_DATA;
 }
 
-function setNewUserData(newData) {
+function setNewUserData(newData: userDataInterface) {
   MOCK_USER_DATA = newData;
 }
 
 export interface SettingPageBlockType {
     className: string,
     settings?: {withInternalID: boolean},
-    settingsImg?: Img,
-    settingsLinkImg?: Link,
-    userInfoCard?: UserInfoCard
-    changeDataForm?: Form,
-    changePasswordForm?: Form,
-    settingsPlug?: Plug,
-    settingsDataLink?: Link,
-    settingsPasswordLink?: Link,
-    settingsExitLink?: Link,
-    buttonBlueBack?: Button
 }
 
 export default class SettingsPage extends Block {
+  declare children: {
+    settingsImg: Img,
+    settingsLinkImg: Link,
+    userInfoCard: UserInfoCard,
+    changeDataForm: Form,
+    changePasswordForm: Form,
+    settingsPlug: Plug,
+    settingsDataLink: Link,
+    settingsPasswordLink: Link,
+    settingsExitLink: Link,
+    buttonBlueBack: Button
+  };
+
   constructor(
     props: SettingPageBlockType,
   ) {
-    // Avatar
-    props.settingsImg = new Img(
+    super('div', props);
+  }
+
+  addChildren() {
+    this.children.settingsImg = new Img(
       {
         className: 'settings-img',
         settings: { withInternalID: true },
@@ -59,8 +74,7 @@ export default class SettingsPage extends Block {
       },
     );
 
-    // Ccылка на смену аватара
-    props.settingsLinkImg = new Link(
+    this.children.settingsLinkImg = new Link(
       {
         className: 'settings-change-img',
         href: '#',
@@ -69,11 +83,10 @@ export default class SettingsPage extends Block {
       },
     );
 
-    // Карточка данных пользователя
-    props.userInfoCard = new UserInfoCard({});
+    const userInfoCard = new UserInfoCard({});
+    this.children.userInfoCard = userInfoCard;
 
-    // Форма смены данных пользователя
-    props.changeDataForm = new Form(
+    const changeDataForm = new Form(
       {
         className: 'change-data-form',
         button: {
@@ -83,12 +96,12 @@ export default class SettingsPage extends Block {
           settings: { withInternalID: true },
           events: {
             click: () => {
-              if (props.changeDataForm.validate()) {
-                const data = props.changeDataForm.get_data();
+              if (changeDataForm.validate()) {
+                const data: userDataInterface = changeDataForm.get_data();
                 console.log(data);
                 setNewUserData(data);
-                props.userInfoCard.refreshUserData();
-                props.changeDataForm.clear();
+                userInfoCard.refreshUserData();
+                changeDataForm.clear();
               }
             },
           },
@@ -212,11 +225,11 @@ export default class SettingsPage extends Block {
         ],
       },
     );
-    // По умолчанию форма скрыта
-    props.changeDataForm.hide();
 
-    // Форма смены пароля
-    props.changePasswordForm = new Form(
+    this.children.changeDataForm = changeDataForm;
+    this.children.changeDataForm.hide();
+
+    const changePasswordForm = new Form(
       {
 
         className: 'change-password-form',
@@ -228,10 +241,10 @@ export default class SettingsPage extends Block {
           settings: { withInternalID: true },
           events: {
             click: () => {
-              if (props.changePasswordForm.validate()) {
-                const data = props.changePasswordForm.get_data();
+              if (changePasswordForm.validate()) {
+                const data = changePasswordForm.get_data();
                 console.log(data);
-                props.changePasswordForm.clear();
+                changePasswordForm.clear();
               }
             },
           },
@@ -310,11 +323,11 @@ export default class SettingsPage extends Block {
         ],
       },
     );
-    // По умолчанию скрыта
-    props.changePasswordForm.hide();
 
-    // Заглушка
-    props.settingsPlug = new Plug(
+    this.children.changePasswordForm = changePasswordForm;
+    this.children.changePasswordForm.hide();
+
+    const settingsPlug = new Plug(
       {
         className: 'plug',
         plugLink: {
@@ -324,9 +337,9 @@ export default class SettingsPage extends Block {
         },
       },
     );
+    this.children.settingsPlug = settingsPlug;
 
-    // Ссылка на изменение данных пользователя
-    props.settingsDataLink = new Link(
+    this.children.settingsDataLink = new Link(
       {
         className: 'settings-change-data',
         href: '#',
@@ -334,13 +347,15 @@ export default class SettingsPage extends Block {
         settings: { withInternalID: true },
         events: {
           click: () => {
-            this.showChangeDataForm();
+            changePasswordForm.hide();
+            changeDataForm.show();
+            settingsPlug.hide();
           },
         },
       },
     );
 
-    props.settingsPasswordLink = new Link(
+    this.children.settingsPasswordLink = new Link(
       {
         className: 'settings-change-password',
         href: '#',
@@ -348,13 +363,15 @@ export default class SettingsPage extends Block {
         settings: { withInternalID: true },
         events: {
           click: () => {
-            this.showChangePasswordForm();
+            changeDataForm.hide();
+            changePasswordForm.show();
+            settingsPlug.hide();
           },
         },
       },
     );
 
-    props.settingsExitLink = new Link(
+    this.children.settingsExitLink = new Link(
       {
         className: 'settings-change-exit',
         href: '/src/pages/login-form/login-form.html',
@@ -363,7 +380,7 @@ export default class SettingsPage extends Block {
       },
     );
 
-    props.buttonBlueBack = new Button(
+    this.children.buttonBlueBack = new Button(
       {
         className: 'settings-btn-back',
         typeName: 'button',
@@ -371,31 +388,15 @@ export default class SettingsPage extends Block {
         settings: { withInternalID: true },
         events: {
           click: () => {
-            this.hideSettings();
+            changeDataForm.hide();
+            changePasswordForm.hide();
+            settingsPlug.show();
           },
         },
       },
     );
-
-    super('div', props);
-  }
-
-  showChangeDataForm() {
-    this.children.changePasswordForm.hide();
-    this.children.changeDataForm.show();
-    this.children.settingsPlug.hide();
-  }
-
-  showChangePasswordForm() {
-    this.children.changeDataForm.hide();
-    this.children.changePasswordForm.show();
-    this.children.settingsPlug.hide();
-  }
-
-  hideSettings() {
-    this.children.changeDataForm.hide();
-    this.children.changePasswordForm.hide();
-    this.children.settingsPlug.show();
+    console.log(this);
+    console.log(this.children);
   }
 
   render() {

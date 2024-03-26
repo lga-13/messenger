@@ -24,9 +24,9 @@ export default class Block {
 
   currentEvents: Record<string, (event?: Event) => void>;
 
-  props: object;
+  props?: object | undefined;
 
-  children: Record<string, Block | Block[]>;
+  children: Record<string, Block | Block[]> | [];
 
   eventBus: () => EventBus;
 
@@ -48,6 +48,10 @@ export default class Block {
       this.props = this._makePropsProxy(props);
     }
     eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  addChildren() {
+    this.children = [];
   }
 
   static _getChildren(propsAndChildren: {}): {children: {string, Block}, props: {} } {
@@ -168,6 +172,7 @@ export default class Block {
   render() {}
 
   compile(template, props) {
+    this.addChildren();
     const propsAndStubs = { ...props };
     Object.entries(this.children).forEach(([key, child]) => {
       if (child instanceof Block) {

@@ -1,6 +1,8 @@
-function render(query, block) {
+import Block from '../components/base/block.ts';
+
+function render(query: string, block: Block) {
   const root = document.querySelector(query);
-  root.appendChild(block.getContent());
+  root?.appendChild(block.getContent());
   return root;
 }
 
