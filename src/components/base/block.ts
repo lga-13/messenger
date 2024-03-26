@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable class-methods-use-this */
 import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
@@ -51,7 +52,6 @@ export default class Block {
   }
 
   addChildren() {
-    this.children = [];
   }
 
   static _getChildren(propsAndChildren: {}): {children: {string, Block}, props: {} } {
