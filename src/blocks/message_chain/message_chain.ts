@@ -17,44 +17,41 @@ export interface MessageChainBlockType {
     messageForm: FormProps,
     attachmentButton: buttonBlockType,
     moreButton: buttonBlockType
-    userId?: number | null
     settings?: {withInternalID: boolean}
-
-    // ЭЛЕМЕНТЫ
-    messageChainMoreButton?: Button,
-    chainMessages? : Message[],
-    messageChainAttachmentsButton? : Button,
-    messageChainForm? : Form,
-    messageSenderName?: Title,
-    chatListHook: () => void
+    chatListHook: () => void,
 }
 
 export default class MessageChain extends Block {
+  declare children: {
+      messageChainMoreButton: Button,
+      chainMessages : Message[],
+      messageChainAttachmentsButton : Button,
+      messageChainForm : Form,
+      messageSenderName: Title,
+
+  };
+
+  declare props: MessageChainBlockType;
+
+  userId: number;
+
   constructor(props: MessageChainBlockType) {
-    props.messageChainMoreButton = new Button(props.moreButton);
-    props.messageSenderName = new Title(props.sender_name);
-    props.messageChainAttachmentsButton = new Button(props.attachmentButton);
-    props.messageChainForm = new Form(props.messageForm);
-    props.userId = null;
     props.settings = { withInternalID: true };
     super('div', props);
   }
 
-  // Обработка времени сообщеняи
-
-  // Функция которая обновляет содержимое мессадж чейна.
   setCurrentMessage(userId: number) {
     // Уставнавливается id для текущего чейна
-    this.props.user_id = userId;
+    this.userId = userId;
 
     // Делаем запрос пользователя
-    const sender = getSender(this.props.user_id);
+    const sender = getSender(this.userId);
 
     // Задаем новый заголовок чейна
     this.children.messageSenderName.setText(sender);
 
     // Делаем запрос сообщений
-    const messagesList = getMessageChain(this.props.user_id);
+    const messagesList = getMessageChain(this.userId);
 
     const messages = [];
     let currentData: null | Date = null;
@@ -91,6 +88,13 @@ export default class MessageChain extends Block {
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     this.props.chatListHook();
+  }
+
+  addChildren() {
+    this.children.messageChainMoreButton = new Button(this.props.moreButton);
+    this.children.messageSenderName = new Title(this.props.sender_name);
+    this.children.messageChainAttachmentsButton = new Button(this.props.attachmentButton);
+    this.children.messageChainForm = new Form(this.props.messageForm);
   }
 
   render() {

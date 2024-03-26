@@ -97,7 +97,7 @@ export default class SettingsPage extends Block {
           events: {
             click: () => {
               if (changeDataForm.validate()) {
-                const data: userDataInterface = changeDataForm.get_data();
+                const data: {} = changeDataForm.get_data();
                 console.log(data);
                 setNewUserData(data);
                 userInfoCard.refreshUserData();
@@ -225,7 +225,6 @@ export default class SettingsPage extends Block {
         ],
       },
     );
-
     this.children.changeDataForm = changeDataForm;
     this.children.changeDataForm.hide();
 

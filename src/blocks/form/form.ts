@@ -93,8 +93,8 @@ export default class Form extends Block {
   }
 
   // Метод возвращает даныне всех полей
-  get_data(): userDataInterface {
-    const currentCondition: userDataInterface = {};
+  get_data(): {} {
+    const currentCondition = {};
 
     Object.values(this.children).forEach((child) => {
       if (child instanceof Array && child.every((item) => item instanceof Field)) {
