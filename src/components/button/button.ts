@@ -7,8 +7,8 @@ export interface buttonBlockType {
     text: string,
     settings?: {withInternalID: boolean},
     events?: {
-        click?: (events) => void,
-        keydown?: (event) => void
+        click?: (events: MouseEvent) => void,
+        keydown?: (event: KeyboardEvent) => void
     },
 }
 
@@ -19,7 +19,7 @@ export default class Button extends Block {
   }
 
   componentDidMount() {
-    this.element.querySelector('button').focus();
+    this.element.querySelector('button')?.focus();
   }
 
   render() {

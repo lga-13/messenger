@@ -185,7 +185,7 @@ export default class Block {
         propsAndStubs[key] = result;
       }
     });
-    const fragment = this._createDocumentElement('template');
+    const fragment: HTMLTemplateElement = this._createDocumentElement('template');
     const currentTemplate = Handlebars.compile(template);
     fragment.innerHTML = currentTemplate(propsAndStubs);
     Object.values(this.children).forEach((child) => {

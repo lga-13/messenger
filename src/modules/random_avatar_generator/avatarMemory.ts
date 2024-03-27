@@ -13,7 +13,7 @@ class Memory {
     this.memory[key] = value;
   }
 
-  exist(key) {
+  exist(key: number) {
     return key in this.memory;
   }
 }
