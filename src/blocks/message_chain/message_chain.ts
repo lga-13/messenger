@@ -4,7 +4,7 @@ import Button, { buttonBlockType } from '../../components/button/button.ts';
 import Title, { TitleBlockType } from '../../components/title/title.ts';
 import Block from '../../components/base/block.ts';
 import Message from './message/message.ts';
-import {getMessageChain, getSender, IMessage} from '../../pages/chat-page/chat-page.ts';
+import { getMessageChain, getSender, IMessage } from '../../pages/chat-page/chat-page.ts';
 import Form, { FormProps } from '../form/form.ts';
 import MessageContainer from './message_container/message_container.ts';
 import TimeConverter from '../../modules/time_prepare/converter.ts';
@@ -49,9 +49,9 @@ export default class MessageChain extends Block {
 
     // Задаем новый заголовок чейна
     if (sender) {
-        this.children.messageSenderName.setText(sender);
+      this.children.messageSenderName.setText(sender);
     } else {
-        throw new Error("Не найден пользователь")
+      throw new Error('Не найден пользователь');
     }
 
     const messagesList: IMessage[] = getMessageChain(this.userId);

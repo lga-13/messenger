@@ -214,11 +214,11 @@ export function getChatsList(): IDialogue[] {
 }
 
 export function getMessageChain(index: number): IMessage[] {
-  const result: IMessage[] | undefined =MOCK_MESSAGE_DATA.find((item) => item.index === index)?.message_chain;
+  const result: IMessage[] | undefined = MOCK_MESSAGE_DATA.find((item) => item.index === index)?.message_chain;
   if (!result) {
-    throw Error("Ошибка при получении сообщений")
+    throw Error('Ошибка при получении сообщений');
   }
-  return result
+  return result;
 }
 
 export function getSender(index: number): string | undefined {
@@ -258,7 +258,6 @@ interface chatPageBlockType{
 }
 
 export default class ChatPage extends Block {
-
   declare children: {
     searchForm: Form,
     accountLink: Link,

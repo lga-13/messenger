@@ -3,11 +3,12 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable class-methods-use-this */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
-
-
 
 export default abstract class Block {
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
@@ -17,7 +18,7 @@ export default abstract class Block {
     FLOW_CDU: 'flow:component-did-update',
   };
 
-  _id: string
+  _id: string;
 
   _element: HTMLElement;
 
@@ -170,10 +171,10 @@ export default abstract class Block {
     const block = this.render();
     this._removeEvents();
     this._element.innerHTML = '';
-    if ( block instanceof Node) {
+    if (block instanceof Node) {
       this._element.appendChild(block);
     } else {
-      throw Error("Ошибка render")
+      throw Error('Ошибка render');
     }
 
     this.addEvents();
@@ -210,7 +211,7 @@ export default abstract class Block {
           if (stub) {
             stub.replaceWith(child.getContent());
           } else {
-            throw Error(`Ошибка при рендере элемента ${child.getContent()}`)
+            throw Error(`Ошибка при рендере элемента ${child.getContent()}`);
           }
         } else if (child instanceof Array) {
           Object.values(child).forEach((childObject) => {
@@ -218,15 +219,14 @@ export default abstract class Block {
             if (stub) {
               stub.replaceWith(childObject.getContent());
             } else {
-              throw Error(`Ошибка при рендере элемента ${childObject.getContent()}`)
+              throw Error(`Ошибка при рендере элемента ${childObject.getContent()}`);
             }
           });
         }
       });
       return fragment.content;
-    } else {
-      throw Error("Не удалось отрендерить")
     }
+    throw Error('Не удалось отрендерить');
   }
 
   show() {

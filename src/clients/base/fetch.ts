@@ -1,10 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface IBodyParam {
-  // описание структуры body
-  [key: string]: any; // замените any на более конкретный тип, если он известен
+  [key: string]: any;
 }
 
 export default class APIClient {
-  static request(method: string, url: string, body: IBodyParam | null = null, params: Record<string, string> | null = null) {
+  static request(
+    method: string,
+    url: string,
+    body: IBodyParam | null = null,
+    params: Record<string, string> | null = null,
+  ) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       let constructedURL = url;

@@ -18,15 +18,13 @@ export interface fieldBlockType {
 }
 
 export default class Field extends Block {
-
   declare children: {
     fieldLabel: Label | null;
     fieldInput: Input;
     fieldErrorMessage: ErrorMessage | null;
     fieldLink: Link | null;
     fieldToggleButton: Button;
-  }
-
+  };
 
   constructor(props: fieldBlockType) {
     props.settings = { withInternalID: true };
@@ -34,21 +32,17 @@ export default class Field extends Block {
   }
 
   addChildren() {
-
-
     let fieldLabel = null;
     if (this.props.label) {
       fieldLabel = new Label(this.props.label);
     }
     this.children.fieldLabel = fieldLabel;
 
-
     let fieldErrorMessage: ErrorMessage | null = null;
     if (this.props.errorMessage) {
       fieldErrorMessage = new ErrorMessage(this.props.errorMessage);
     }
     this.children.fieldErrorMessage = fieldErrorMessage;
-
 
     this.props.input.events = {
       click: () => {
@@ -65,7 +59,6 @@ export default class Field extends Block {
       },
     };
     this.children.fieldInput = new Input(this.props.input);
-
 
     // Ссылка
     let fieldLink = null;
@@ -85,7 +78,6 @@ export default class Field extends Block {
         },
       });
     }
-    console.log(this.children)
   }
 
   private inputValue() {

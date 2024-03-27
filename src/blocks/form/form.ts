@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Field, { fieldBlockType } from './field/field.ts';
 import greetings from './form-template.ts';
 import Link, { LinkBlockType } from '../../components/link/link.ts';
@@ -16,20 +17,16 @@ export interface FormProps {
 }
 
 export default class Form extends Block {
-
   declare children: {
     formTitle: Title | null,
     formFields: Field[],
     formButton: Button,
     formLink: Link | null,
-  }
+  };
 
-  declare props: FormProps
+  declare props: FormProps;
 
   constructor(props: FormProps) {
-
-
-
     props.settings = { withInternalID: true };
 
     super('div', props);
