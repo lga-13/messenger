@@ -200,24 +200,24 @@ export const MOCK_MESSAGE_DATA: IDialogue[] = [
 ];
 
 MOCK_MESSAGE_DATA.forEach((chat: IDialogue) => {
-  chat.message_chain.sort((a, b) => new Date(a.time) - new Date(b.time));
+  chat.message_chain.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
 });
 
 export function getChatsList(): IDialogue[] {
   const sortChats = (chats: IDialogue[]) => chats.sort((a: IDialogue, b: IDialogue) => {
     const lastMessageTimeA = a.message_chain[a.message_chain.length - 1].time;
     const lastMessageTimeB = b.message_chain[b.message_chain.length - 1].time;
-    return lastMessageTimeB - lastMessageTimeA;
+    return lastMessageTimeB.getTime() - lastMessageTimeA.getTime();
   });
 
   return sortChats(MOCK_MESSAGE_DATA);
 }
 
-export function getMessageChain(index: number) {
+export function getMessageChain(index: number): IMessage[] | undefined {
   return MOCK_MESSAGE_DATA.find((item) => item.index === index)?.message_chain;
 }
 
-export function getSender(index: number) {
+export function getSender(index: number): string | undefined {
   return MOCK_MESSAGE_DATA.find((item) => item.index === index)?.sender;
 }
 
@@ -234,7 +234,7 @@ export function addMessageChain(index: number, message: string, time: Date) {
     throw new Error(`Нет элемента с индексом ${index}`);
   }
   MOCK_MESSAGE_DATA.forEach((chat: IDialogue) => {
-    chat.message_chain.sort((a: IMessage, b: IMessage) => new Date(a.time) - new Date(b.time));
+    chat.message_chain.sort((a: IMessage, b: IMessage) => new Date(a.time).getTime() - new Date(b.time).getTime());
   });
 }
 
@@ -254,6 +254,7 @@ interface chatPageBlockType{
 }
 
 export default class ChatPage extends Block {
+
   declare children: {
     searchForm: Form,
     accountLink: Link,

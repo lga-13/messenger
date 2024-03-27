@@ -45,15 +45,19 @@ export default class MessageChain extends Block {
     this.userId = userId;
 
     // Делаем запрос пользователя
-    const sender = getSender(this.userId);
+    const sender: string | undefined = getSender(this.userId);
 
     // Задаем новый заголовок чейна
-    this.children.messageSenderName.setText(sender);
+    if (sender) {
+        this.children.messageSenderName.setText(sender);
+    } else {
+        throw new Error("Не найден пользователь")
+    }
 
     // Делаем запрос сообщений
     const messagesList = getMessageChain(this.userId);
 
-    const messages = [];
+    const messages: MessageContainer[] = [];
     let currentData: null | Date = null;
     Object.values(messagesList).forEach((message) => {
       let dataTitle = null;

@@ -25,9 +25,9 @@ export default class Block {
 
   currentEvents: Record<string, (event?: Event) => void>;
 
-  props?: object | undefined;
+  props: Record<string, any>;
 
-  children: Record<string, Block | Block[]> | [];
+  children: Record<string, Block | Block[]>;
 
   eventBus: () => EventBus;
 
@@ -54,8 +54,10 @@ export default class Block {
   addChildren() {
   }
 
-  static _getChildren(propsAndChildren: {}): {children: {string, Block}, props: {} } {
-    const children: {string, Block} = {};
+  static _getChildren(propsAndChildren: {}): {children: Record<string, Block | Block[]>, props: {
+      settings: any;
+    } } {
+    const children: Record<string, Block | Block[]> = {};
     const props = {};
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -171,13 +173,13 @@ export default class Block {
 
   render() {}
 
-  compile(template, props) {
+  compile(template: string, props: Record<string, any>) {
     this.addChildren();
     const propsAndStubs = { ...props };
     Object.entries(this.children).forEach(([key, child]) => {
       if (child instanceof Block) {
         propsAndStubs[key] = `<div data_id="${child._id}"></div>`;
-      } else {
+      } else if (child instanceof Array && child.every((item) => item instanceof Block)) {
         const result: string[] = [];
         Object.values(child).forEach((childObject) => {
           result.push(`<div data_id="${childObject._id}"></div>`);
@@ -185,7 +187,7 @@ export default class Block {
         propsAndStubs[key] = result;
       }
     });
-    const fragment: HTMLTemplateElement = this._createDocumentElement('template');
+    const fragment: HTMLElement = this._createDocumentElement('template');
     const currentTemplate = Handlebars.compile(template);
     fragment.innerHTML = currentTemplate(propsAndStubs);
     Object.values(this.children).forEach((child) => {

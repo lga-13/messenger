@@ -1,4 +1,4 @@
-const monthDict = {
+const monthDict: { [key: number]: string } = {
   0: 'января',
   1: 'февраля',
   2: 'марта',
