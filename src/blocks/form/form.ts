@@ -24,6 +24,8 @@ export default class Form extends Block {
     formLink: Link | null,
   }
 
+  declare props: FormProps
+
   constructor(props: FormProps) {
 
 
@@ -41,8 +43,8 @@ export default class Form extends Block {
     this.children.formTitle = formTitle;
 
     // Поля формы
-    const formFields = [];
-    Object.values(this.props.fields).forEach((field) => {
+    const formFields: Field[] = [];
+    Object.values(this.props.fields).forEach((field: fieldBlockType) => {
       const currentField = new Field(field);
       formFields.push(currentField);
     });
