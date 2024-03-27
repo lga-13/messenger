@@ -35,12 +35,12 @@ export default class ChatList extends Block {
       if (formattedText.length > 25) {
         formattedText = `${formattedText.substring(0, 25)} ...`;
       }
-      let active_verdict = false
+      let activeVerdict = false;
       if (activeChat && activeChat === chat.index) {
-        active_verdict = true
+        activeVerdict = true;
       }
       const currentChatMiniature = new ChatMiniature({
-        active: active_verdict,
+        active: activeVerdict,
         srcName: RandomAvatar.get(chat.index),
         index: chat.index,
         sender: chat.sender,
@@ -71,13 +71,10 @@ export default class ChatList extends Block {
   render() {
     if (!this.children.chatList) {
       this.buildChatList();
+    } else if (this.userId) {
+      this.buildChatList(this.userId);
     } else {
-      if (this.userId) {
-        this.buildChatList(this.userId);
-      } else {
-        this.buildChatList();
-      }
-
+      this.buildChatList();
     }
     return this.compile(greetings, this.props);
   }

@@ -41,18 +41,16 @@ export default class Input extends Block {
   clear() {
     const input = this.element.querySelector('input');
     if (input) {
-        input.value = '';
+      input.value = '';
     }
   }
 
   getInputValue(): string {
     const input = this.element.querySelector('input');
     if (input) {
-        return input.value;
-    } else {
-        throw Error("Ошибка при получении значения")
+      return input.value;
     }
-
+    throw Error('Ошибка при получении значения');
   }
 
   getName(): string {
