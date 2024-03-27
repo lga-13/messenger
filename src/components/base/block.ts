@@ -9,7 +9,7 @@ import EventBus from './event-bus.ts';
 
 
 
-export default class Block {
+export default abstract class Block {
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -179,7 +179,8 @@ export default class Block {
     this.addEvents();
   }
 
-  render(): Node {}
+  // @ts-ignore
+  abstract render(): Node;
 
   compile(template: string, props: Record<string, any>) {
     this.addChildren();

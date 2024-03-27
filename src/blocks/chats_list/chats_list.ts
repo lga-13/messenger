@@ -35,9 +35,12 @@ export default class ChatList extends Block {
       if (formattedText.length > 25) {
         formattedText = `${formattedText.substring(0, 25)} ...`;
       }
-
+      let active_verdict = false
+      if (activeChat && activeChat === chat.index) {
+        active_verdict = true
+      }
       const currentChatMiniature = new ChatMiniature({
-        active: (activeChat && activeChat === chat.index),
+        active: active_verdict,
         srcName: RandomAvatar.get(chat.index),
         index: chat.index,
         sender: chat.sender,

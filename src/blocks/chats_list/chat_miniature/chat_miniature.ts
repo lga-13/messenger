@@ -10,7 +10,7 @@ interface ChatMiniatureBlockType {
     content: string,
     time: string,
     count: number,
-    settings: {withInternalID: boolean},
+    settings?: {withInternalID: boolean},
     events: {
         click: () => void
     }
