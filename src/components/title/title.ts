@@ -9,6 +9,8 @@ export interface TitleBlockType {
 }
 
 export default class Title extends Block {
+  declare props: TitleBlockType;
+
   constructor(props: TitleBlockType) {
     // Создаём враппер DOM-элемент button
     super('div', props);

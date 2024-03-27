@@ -2,27 +2,37 @@ import Block from '../base/block.ts';
 import greetings from './plug-template.ts';
 import Link from '../link/link.ts';
 
+interface PlugBlockType{
+    className: string,
+    link: {
+        className:string,
+        href: string,
+        text: string
+    },
+    settings?: { withInternalID: true }
+}
+
 export default class Plug extends Block {
+  declare children: {
+      plugLink: Link
+  };
+
+  declare props: PlugBlockType;
+
   constructor(
-    props: {
-            className: string,
-            plugLink: {
-                className:string,
-                href: string,
-                text: string
-            }},
+    props: PlugBlockType,
   ) {
-    const plugLink = new Link({
-      className: props.plugLink.className,
-      href: props.plugLink.href,
-      settings: { withInternalID: true },
-      text: props.plugLink.text,
-
-    });
-    props.plugLink = plugLink;
-
     props.settings = { withInternalID: true };
     super('div', props);
+  }
+
+  addChildren() {
+    this.children.plugLink = new Link({
+      className: this.props.link.className,
+      href: this.props.link.href,
+      text: this.props.link.text,
+
+    });
   }
 
   render() {

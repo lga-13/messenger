@@ -199,12 +199,12 @@ export const MOCK_MESSAGE_DATA: IDialogue[] = [
   },
 ];
 
-MOCK_MESSAGE_DATA.forEach((chat) => {
+MOCK_MESSAGE_DATA.forEach((chat: IDialogue) => {
   chat.message_chain.sort((a, b) => new Date(a.time) - new Date(b.time));
 });
 
-export function getChatsList(): IDialogue {
-  const sortChats = (chats) => chats.sort((a, b) => {
+export function getChatsList(): IDialogue[] {
+  const sortChats = (chats: IDialogue[]) => chats.sort((a: IDialogue, b: IDialogue) => {
     const lastMessageTimeA = a.message_chain[a.message_chain.length - 1].time;
     const lastMessageTimeB = b.message_chain[b.message_chain.length - 1].time;
     return lastMessageTimeB - lastMessageTimeA;
@@ -221,7 +221,7 @@ export function getSender(index: number) {
   return MOCK_MESSAGE_DATA.find((item) => item.index === index)?.sender;
 }
 
-export function addMessageChain(index, message, time) {
+export function addMessageChain(index: number, message: string, time: Date) {
   const messageItem = MOCK_MESSAGE_DATA.find((item) => item.index === index);
   if (messageItem) {
     messageItem.message_chain.push({
@@ -233,12 +233,12 @@ export function addMessageChain(index, message, time) {
   } else {
     throw new Error(`Нет элемента с индексом ${index}`);
   }
-  MOCK_MESSAGE_DATA.forEach((chat) => {
-    chat.message_chain.sort((a, b) => new Date(a.time) - new Date(b.time));
+  MOCK_MESSAGE_DATA.forEach((chat: IDialogue) => {
+    chat.message_chain.sort((a: IMessage, b: IMessage) => new Date(a.time) - new Date(b.time));
   });
 }
 
-export function readMessageChain(index) {
+export function readMessageChain(index: number) {
   const messageItem = MOCK_MESSAGE_DATA.find((item) => item.index === index);
   if (messageItem) {
     Object.values(messageItem.message_chain).forEach((message) => {
@@ -327,7 +327,7 @@ export default class ChatPage extends Block {
 
     const chatPlug = new Plug({
       className: 'chats-plug',
-      plugLink: {
+      link: {
         className: 'chats-plug-message',
         href: '#',
         text: 'Выберите чат, чтобы начать общаться.',
@@ -335,12 +335,11 @@ export default class ChatPage extends Block {
     });
     this.children.chatPlug = chatPlug;
 
-    const accountLink = new Link({
+    this.children.accountLink = new Link({
       className: 'chats-account',
       href: '/src/pages/settings-page/settings-page.html',
       text: 'Аккаунт',
     });
-    this.children.accountLink = accountLink;
 
     const searchForm = new Form(
       {

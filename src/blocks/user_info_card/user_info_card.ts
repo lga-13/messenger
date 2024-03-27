@@ -22,7 +22,7 @@ export class UserInfoCard extends Block {
     super('div', props);
   }
 
-  static generateBlock(data: {string: string}) {
+  static generateBlock(data: Record<string, string>) {
     const titles = [];
     // Делаем запрос пользователя
     Object.values(data).forEach((titleText) => {

@@ -97,7 +97,7 @@ export default class SettingsPage extends Block {
           events: {
             click: () => {
               if (changeDataForm.validate()) {
-                const data: {} = changeDataForm.get_data();
+                const data: userDataInterface = changeDataForm.get_data();
                 console.log(data);
                 setNewUserData(data);
                 userInfoCard.refreshUserData();
@@ -329,7 +329,7 @@ export default class SettingsPage extends Block {
     const settingsPlug = new Plug(
       {
         className: 'plug',
-        plugLink: {
+        link: {
           className: 'settings-window-link',
           href: '#',
           text: 'Выберите, какие изменения хотите внести.',
