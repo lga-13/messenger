@@ -13,7 +13,7 @@ export interface ChatListBlockType
 export default class ChatList extends Block {
   userId?: number;
 
-  declare props?: {
+  declare props: {
     showMessageChain: (user_id: number) => void
   };
 
