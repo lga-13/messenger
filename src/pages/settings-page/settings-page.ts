@@ -23,7 +23,7 @@ export interface userDataInterface {
   phone: string
 }
 
-let MOCK_USER_DATA: userDataInterface = {
+let MOCK_USER_DATA: Record<string, string> = {
   login: 'admin',
   first_name: 'Глеб',
   second_name: 'Лазарев',
@@ -35,7 +35,7 @@ export function getUserData() {
   return MOCK_USER_DATA;
 }
 
-function setNewUserData(newData: userDataInterface) {
+function setNewUserData(newData: Record<string, string>) {
   MOCK_USER_DATA = newData;
 }
 
@@ -97,11 +97,12 @@ export default class SettingsPage extends Block {
           events: {
             click: () => {
               if (changeDataForm.validate()) {
-                const data: userDataInterface = changeDataForm.get_data();
+                const data= changeDataForm.get_data();
                 console.log(data);
                 setNewUserData(data);
                 userInfoCard.refreshUserData();
                 changeDataForm.clear();
+
               }
             },
           },

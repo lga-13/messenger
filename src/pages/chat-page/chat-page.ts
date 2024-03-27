@@ -292,7 +292,7 @@ export default class ChatPage extends Block {
           events: {
             click: () => {
               if (messageChain.children.messageChainForm.validate()) {
-                const message: {message: string} = messageChain.children.messageChainForm.get_data();
+                const message: Record<string, string> = messageChain.children.messageChainForm.get_data();
                 addMessageChain(messageChain.userId, message.message, new Date());
                 messageChain.setCurrentMessage(messageChain.userId);
                 messageChain.children.messageChainForm.clear();

@@ -3,13 +3,8 @@ interface IBodyParam {
   [key: string]: any; // замените any на более конкретный тип, если он известен
 }
 
-interface IURLParams {
-  // описание структуры параметров URL
-  [key: string]: string | number | boolean; // или любой другой требуемый тип
-}
-
 export default class APIClient {
-  static request(method: string, url: string, body: IBodyParam | null = null, params: IURLParams | null = null) {
+  static request(method: string, url: string, body: IBodyParam | null = null, params: Record<string, string> | null = null) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       let constructedURL = url;
@@ -44,7 +39,7 @@ export default class APIClient {
     });
   }
 
-  static get(url: string, params: IURLParams) {
+  static get(url: string, params: Record<string, string>) {
     return APIClient.request('GET', url, null, params);
   }
 
