@@ -18,13 +18,10 @@ export default class ChatList extends Block {
   };
 
   constructor(props: ChatListBlockType) {
-    // Созадние чат листа
-
-    // Создаём враппер DOM-элемент button
     super('div', props);
   }
 
-  buildChatList(activeChat = null) {
+  buildChatList(activeChat: number | null = null) {
     const chatList: ChatMiniature[] = [];
     Object.values(getChatsList()).forEach((chat: IDialogue) => {
       let counter = 0;
@@ -40,7 +37,7 @@ export default class ChatList extends Block {
       }
 
       const currentChatMiniature = new ChatMiniature({
-        active: activeChat && activeChat === chat.index,
+        active: (activeChat && activeChat === chat.index),
         srcName: RandomAvatar.get(chat.index),
         index: chat.index,
         sender: chat.sender,
@@ -72,7 +69,12 @@ export default class ChatList extends Block {
     if (!this.children.chatList) {
       this.buildChatList();
     } else {
-      this.buildChatList(this.userId);
+      if (this.userId) {
+        this.buildChatList(this.userId);
+      } else {
+        this.buildChatList();
+      }
+
     }
     return this.compile(greetings, this.props);
   }

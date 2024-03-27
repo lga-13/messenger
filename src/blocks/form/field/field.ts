@@ -19,7 +19,6 @@ export interface fieldBlockType {
 
 export default class Field extends Block {
 
-
   declare children: {
     fieldLabel: Label | null;
     fieldInput: Input;

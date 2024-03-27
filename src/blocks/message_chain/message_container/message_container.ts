@@ -4,7 +4,7 @@ import Message from '../message/message.ts';
 import Title from '../../../components/title/title.ts';
 
 export interface MessageContainerBlockType{
-    messageData?: Title,
+    messageData: Title | null,
     message: Message,
 }
 

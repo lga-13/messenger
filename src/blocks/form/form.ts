@@ -95,9 +95,9 @@ export default class Form extends Block {
   get_data(): any {
     const currentCondition = {};
 
-    Object.values(this.children).forEach((child) => {
+    Object.values(this.children).forEach((child: Block | Block[]) => {
       if (child instanceof Array && child.every((item) => item instanceof Field)) {
-        Object.values(child).forEach((field) => {
+        Object.values(child).forEach((field: Field) => {
           currentCondition[field.getName()] = field.getInputValue();
         });
       }

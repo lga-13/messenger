@@ -7,7 +7,7 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
 
-type UUID = string & { isUUID: true };
+
 
 export default class Block {
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
@@ -17,7 +17,7 @@ export default class Block {
     FLOW_CDU: 'flow:component-did-update',
   };
 
-  _id: UUID | null = null;
+  _id: string
 
   _element: HTMLElement;
 
@@ -27,7 +27,7 @@ export default class Block {
 
   props: Record<string, any>;
 
-  children: Record<string, Block | Block[]>;
+  children: Record<string, Block | Block[] | null>;
 
   eventBus: () => EventBus;
 
@@ -55,10 +55,10 @@ export default class Block {
   }
 
   static _getChildren(propsAndChildren: {}): {children: Record<string, Block | Block[]>, props: {
-      settings: any;
+      settings?: any;
     } } {
     const children: Record<string, Block | Block[]> = {};
-    const props = {};
+    const props: Record<string, any> = {};
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
@@ -78,14 +78,14 @@ export default class Block {
     eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdate.bind(this));
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props: Record<string, any>) {
     const self = this;
     return new Proxy(props, {
-      get(target, prop) {
+      get(target: Record<string, any>, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set(target: Record<string, any>, prop: string, value) {
         // Копируем текущие пропсы
         const oldProps = { ...self.props };
         target[prop] = value;
@@ -99,8 +99,11 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName: string) {
+  _createDocumentElement(tagName: string): HTMLElement | HTMLTemplateElement {
     const element = document.createElement(tagName);
+    if (tagName === 'template') {
+      return <HTMLTemplateElement>element;
+    }
     if (element instanceof HTMLElement) {
       if (this._id) {
         element.setAttribute('data-id', this._id);
@@ -124,7 +127,7 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
     const response = oldProps !== newProps;
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -156,7 +159,7 @@ export default class Block {
     return this.element;
   }
 
-  setProps = (nextProps) => {
+  setProps = (nextProps: Record<string, any>) => {
     if (!nextProps) {
       return;
     }
@@ -167,15 +170,22 @@ export default class Block {
     const block = this.render();
     this._removeEvents();
     this._element.innerHTML = '';
-    this._element.appendChild(block);
+    if ( block instanceof Node) {
+      this._element.appendChild(block);
+    } else {
+      throw Error("Ошибка render")
+    }
+
     this.addEvents();
   }
 
-  render() {}
+  render(): Node {}
 
   compile(template: string, props: Record<string, any>) {
     this.addChildren();
+
     const propsAndStubs = { ...props };
+
     Object.entries(this.children).forEach(([key, child]) => {
       if (child instanceof Block) {
         propsAndStubs[key] = `<div data_id="${child._id}"></div>`;
@@ -187,22 +197,35 @@ export default class Block {
         propsAndStubs[key] = result;
       }
     });
-    const fragment: HTMLElement = this._createDocumentElement('template');
-    const currentTemplate = Handlebars.compile(template);
-    fragment.innerHTML = currentTemplate(propsAndStubs);
-    Object.values(this.children).forEach((child) => {
-      if (child instanceof Block) {
-        const stub = fragment.content.querySelector(`[data_id="${child._id}"]`);
-        stub.replaceWith(child.getContent());
-      } else if (child instanceof Array) {
-        Object.values(child).forEach((childObject) => {
-          const stub = fragment.content.querySelector(`[data_id="${childObject._id}"]`);
-          stub.replaceWith(childObject.getContent());
-        });
-      }
-    });
 
-    return fragment.content;
+    const fragment: HTMLElement | HTMLTemplateElement = this._createDocumentElement('template');
+    const currentTemplate = Handlebars.compile(template);
+
+    fragment.innerHTML = currentTemplate(propsAndStubs);
+    if ('content' in fragment) {
+      Object.values(this.children).forEach((child) => {
+        if (child instanceof Block) {
+          const stub = fragment.content.querySelector(`[data_id="${child._id}"]`);
+          if (stub) {
+            stub.replaceWith(child.getContent());
+          } else {
+            throw Error(`Ошибка при рендере элемента ${child.getContent()}`)
+          }
+        } else if (child instanceof Array) {
+          Object.values(child).forEach((childObject) => {
+            const stub = fragment.content.querySelector(`[data_id="${childObject._id}"]`);
+            if (stub) {
+              stub.replaceWith(childObject.getContent());
+            } else {
+              throw Error(`Ошибка при рендере элемента ${childObject.getContent()}`)
+            }
+          });
+        }
+      });
+      return fragment.content;
+    } else {
+      throw Error("Не удалось отрендерить")
+    }
   }
 
   show() {
