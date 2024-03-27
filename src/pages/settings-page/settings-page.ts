@@ -394,8 +394,6 @@ export default class SettingsPage extends Block {
         },
       },
     );
-    console.log(this);
-    console.log(this.children);
   }
 
   render() {

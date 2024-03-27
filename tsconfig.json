@@ -16,7 +16,8 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false
   },
   "include": ["src", "server.js", "vite.config.ts", "vite-env.d.ts"]
 }

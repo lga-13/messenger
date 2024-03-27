@@ -4,7 +4,7 @@ import Button, { buttonBlockType } from '../../components/button/button.ts';
 import Title, { TitleBlockType } from '../../components/title/title.ts';
 import Block from '../../components/base/block.ts';
 import Message from './message/message.ts';
-import { getMessageChain, getSender } from '../../pages/chat-page/chat-page.ts';
+import {getMessageChain, getSender, IMessage} from '../../pages/chat-page/chat-page.ts';
 import Form, { FormProps } from '../form/form.ts';
 import MessageContainer from './message_container/message_container.ts';
 import TimeConverter from '../../modules/time_prepare/converter.ts';
@@ -54,12 +54,10 @@ export default class MessageChain extends Block {
         throw new Error("Не найден пользователь")
     }
 
-    // Делаем запрос сообщений
-    const messagesList = getMessageChain(this.userId);
-
+    const messagesList: IMessage[] = getMessageChain(this.userId);
     const messages: MessageContainer[] = [];
     let currentData: null | Date = null;
-    Object.values(messagesList).forEach((message) => {
+    Object.values(messagesList).forEach((message: IMessage) => {
       let dataTitle = null;
       if (!(currentData instanceof Date) || !DateComparator.inOneDay(currentData, message.time)
       ) {

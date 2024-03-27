@@ -11,7 +11,7 @@ import Form from '../../blocks/form/form.ts';
 import './chat-page.css';
 import render from '../../utils/render.ts';
 
-interface IMessage {
+export interface IMessage {
   me: boolean;
   text: string;
   time: Date;
@@ -213,8 +213,12 @@ export function getChatsList(): IDialogue[] {
   return sortChats(MOCK_MESSAGE_DATA);
 }
 
-export function getMessageChain(index: number): IMessage[] | undefined {
-  return MOCK_MESSAGE_DATA.find((item) => item.index === index)?.message_chain;
+export function getMessageChain(index: number): IMessage[] {
+  const result: IMessage[] | undefined =MOCK_MESSAGE_DATA.find((item) => item.index === index)?.message_chain;
+  if (!result) {
+    throw Error("Ошибка при получении сообщений")
+  }
+  return result
 }
 
 export function getSender(index: number): string | undefined {
