@@ -1,6 +1,6 @@
 import greetings from './user_info_card-template.ts';
 import Block from '../../components/base/block.ts';
-import {getUserData, userDataInterface} from '../../pages/settings-page/settings-page.ts';
+import {getUserData } from '../../pages/settings-page/settings-page.ts';
 import Title from '../../components/title/title.ts';
 
 export interface UserInfoCardBlockType{}
@@ -28,7 +28,7 @@ export class UserInfoCard extends Block {
     });
   }
 
-  static generateBlock(data: userDataInterface) {
+  static generateBlock(data: Record<string, string>) {
     const titles: Title[]  = [];
     // Делаем запрос пользователя
     Object.values(data).forEach((titleText) => {

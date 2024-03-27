@@ -91,10 +91,10 @@ export default class Form extends Block {
   }
 
   // Метод возвращает даныне всех полей
-  get_data(): any {
-    const currentCondition = {};
+  get_data(): Record<string, string> {
+    const currentCondition: { [key: string]: any } = {};
 
-    Object.values(this.children).forEach((child: Block | Block[]) => {
+    Object.values(this.children).forEach((child) => {
       if (child instanceof Array && child.every((item) => item instanceof Field)) {
         Object.values(child).forEach((field: Field) => {
           currentCondition[field.getName()] = field.getInputValue();
