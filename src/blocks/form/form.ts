@@ -7,59 +7,56 @@ import Block from '../../components/base/block.ts';
 
 export interface FormProps {
     className: string,
-
-    // ДАНЫНЕ ЭЛЕМЕНТОВ
-
     title?: TitleBlockType,
-
-    // Обязательная кнопка
     button: buttonBlockType,
-
-    // Необязательная ссылка под кнопкой
     link?: LinkBlockType
-
     fields: fieldBlockType[],
-
-    // ЭЛЕМЕНТЫ
-    formTitle?: Title | null
-    formFields?: Field[]
-    formButton?: Button,
-    formLink?: Link | null,
-
     settings?: {withInternalID: boolean}
 
 }
 
 export default class Form extends Block {
+
+  declare children: {
+    formTitle: Title | null,
+    formFields: Field[],
+    formButton: Button,
+    formLink: Link | null,
+  }
+
   constructor(props: FormProps) {
-    // Заголовок формы
-    let formTitle = null;
-    if (props.title) {
-      formTitle = new Title(props.title);
-    }
-    props.formTitle = formTitle;
 
-    // Поля формы
-    const formFields = [];
-    Object.values(props.fields).forEach((field) => {
-      const currentField = new Field(field);
-      formFields.push(currentField);
-    });
-    props.formFields = formFields;
 
-    // Кнопка
-    props.formButton = new Button(props.button);
-
-    // Ссылка формы
-    let formLink = null;
-    if (props.link) {
-      formLink = new Link(props.link);
-    }
-    props.formLink = formLink;
 
     props.settings = { withInternalID: true };
 
     super('div', props);
+  }
+
+  addChildren() {
+    let formTitle = null;
+    if (this.props.title) {
+      formTitle = new Title(this.props.title);
+    }
+    this.children.formTitle = formTitle;
+
+    // Поля формы
+    const formFields = [];
+    Object.values(this.props.fields).forEach((field) => {
+      const currentField = new Field(field);
+      formFields.push(currentField);
+    });
+    this.children.formFields = formFields;
+
+    // Кнопка
+    this.children.formButton = new Button(this.props.button);
+
+    // Ссылка формы
+    let formLink = null;
+    if (this.props.link) {
+      formLink = new Link(this.props.link);
+    }
+    this.children.formLink = formLink;
   }
 
   // Очистка полей формы
