@@ -1,29 +1,35 @@
 import greetings from './user_info_card-template.ts';
 import Block from '../../components/base/block.ts';
-import { getUserData } from '../../pages/settings-page/settings-page.ts';
+import {getUserData, userDataInterface} from '../../pages/settings-page/settings-page.ts';
 import Title from '../../components/title/title.ts';
 
-export interface UserInfoCardBlockType{
-    cardTitles?: Title[]
-}
+export interface UserInfoCardBlockType{}
 
 export class UserInfoCard extends Block {
+
+
+  declare children: {
+    cardTitles: Title[]
+  }
+
   constructor(props: UserInfoCardBlockType) {
-    props.cardTitles = [];
+    super('div', props);
+  }
+
+  addChildren() {
+    this.children.cardTitles = [];
     Object.values(getUserData()).forEach((title) => {
-      props.cardTitles.push(new Title({
+      this.children.cardTitles.push(new Title({
         className: 'settings-label',
         text: title,
         settings: { withInternalID: true },
         tag: 'p',
       }));
     });
-    // props.cardTitles = UserInfoCard.generateBlock(MOCK_USER_DATA)
-    super('div', props);
   }
 
-  static generateBlock(data: Record<string, string>) {
-    const titles = [];
+  static generateBlock(data: userDataInterface) {
+    const titles: Title[]  = [];
     // Делаем запрос пользователя
     Object.values(data).forEach((titleText) => {
       titles.push(new Title({

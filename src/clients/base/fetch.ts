@@ -1,5 +1,15 @@
+interface IBodyParam {
+  // описание структуры body
+  [key: string]: any; // замените any на более конкретный тип, если он известен
+}
+
+interface IURLParams {
+  // описание структуры параметров URL
+  [key: string]: string | number | boolean; // или любой другой требуемый тип
+}
+
 export default class APIClient {
-  static request(method: string, url: string, body = null, params = null) {
+  static request(method: string, url: string, body: IBodyParam | null = null, params: IURLParams | null = null) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       let constructedURL = url;
@@ -34,19 +44,19 @@ export default class APIClient {
     });
   }
 
-  static get(url: string, params) {
+  static get(url: string, params: IURLParams) {
     return APIClient.request('GET', url, null, params);
   }
 
-  static post(url: string, body) {
+  static post(url: string, body: IBodyParam) {
     return APIClient.request('POST', url, body);
   }
 
-  static put(url: string, body) {
+  static put(url: string, body: IBodyParam) {
     return APIClient.request('PUT', url, body);
   }
 
-  static delete(url: string, body) {
+  static delete(url: string, body: IBodyParam) {
     return APIClient.request('DELETE', url, body);
   }
 }

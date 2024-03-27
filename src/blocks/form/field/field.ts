@@ -14,58 +14,69 @@ export interface fieldBlockType {
     errorMessage?: ErrorMessageBlockType
     link?: LinkBlockType
     validator: (value: string) => boolean
-
-    // ЭЛЕМЕНТЫ
-    fieldLabel?: Label | null;
-    fieldInput?: Input;
-    fieldErrorMessage?: ErrorMessage | null;
-    fieldLink?: Link | null;
-    fieldToggleButton?: Button;
-
     settings?: { withInternalID: boolean };
 }
 
 export default class Field extends Block {
+
+
+  declare children: {
+    fieldLabel: Label | null;
+    fieldInput: Input;
+    fieldErrorMessage: ErrorMessage | null;
+    fieldLink: Link | null;
+    fieldToggleButton: Button;
+  }
+
+
   constructor(props: fieldBlockType) {
-    // Label
+    props.settings = { withInternalID: true };
+    super('div', props);
+  }
+
+  addChildren() {
+
+
     let fieldLabel = null;
-    if (props.label) {
-      fieldLabel = new Label(props.label);
+    if (this.props.label) {
+      fieldLabel = new Label(this.props.label);
     }
-    props.fieldLabel = fieldLabel;
-    // Инпут
-    props.input.events = {
+    this.children.fieldLabel = fieldLabel;
+
+
+    let fieldErrorMessage: ErrorMessage | null = null;
+    if (this.props.errorMessage) {
+      fieldErrorMessage = new ErrorMessage(this.props.errorMessage);
+    }
+    this.children.fieldErrorMessage = fieldErrorMessage;
+
+
+    this.props.input.events = {
       click: () => {
-        if (props.fieldErrorMessage) {
-          props.fieldErrorMessage.hide();
+        if (fieldErrorMessage) {
+          fieldErrorMessage.hide();
         }
       },
       blur: () => {
         if (!this.validate()) {
-          if (this.props.fieldErrorMessage) {
-            this.props.fieldErrorMessage.show();
+          if (fieldErrorMessage) {
+            fieldErrorMessage.show();
           }
         }
       },
     };
-    props.fieldInput = new Input(props.input);
+    this.children.fieldInput = new Input(this.props.input);
 
-    // Сообщение ошибки
-    let fieldErrorMessage = null;
-    if (props.errorMessage) {
-      fieldErrorMessage = new ErrorMessage(props.errorMessage);
-    }
-    props.fieldErrorMessage = fieldErrorMessage;
 
     // Ссылка
     let fieldLink = null;
-    if (props.link) {
-      fieldLink = new Link(props.link);
+    if (this.props.link) {
+      fieldLink = new Link(this.props.link);
     }
-    props.fieldLink = fieldLink;
+    this.children.fieldLink = fieldLink;
 
-    if (props.input.inputType === 'password') {
-      props.fieldToggleButton = new Button({
+    if (this.props.input.inputType === 'password') {
+      this.children.fieldToggleButton = new Button({
         className: 'form-toggle',
         typeName: 'button',
         text: '👁',
@@ -75,10 +86,7 @@ export default class Field extends Block {
         },
       });
     }
-
-    props.settings = { withInternalID: true };
-
-    super('div', props);
+    console.log(this.children)
   }
 
   private inputValue() {
