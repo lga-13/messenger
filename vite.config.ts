@@ -17,6 +17,14 @@ export default defineConfig({
         chatsList: '/src/pages/chat-page/chat-page.html',
       },
     },
-
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "/src/public/static/styles/variables.pcss";
+        `,
+      },
+    },
   },
 });

@@ -66,7 +66,7 @@ export default class MessageChain extends Block {
           {
             className: 'message-chain-data-title',
             text: new TimeConverter(message.time).toChainTitles(),
-            tag: 'h3',
+            tag: 'h5',
           },
 
         );
