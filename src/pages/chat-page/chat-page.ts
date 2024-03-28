@@ -364,7 +364,7 @@ export default class ChatPage extends Block {
           input: {
             className: 'chats-search-input',
             name: 'chat_search',
-            placeholder: '',
+            placeholder: 'Поиск',
             inputType: 'text',
           },
           validator: Validator.validateSearch,

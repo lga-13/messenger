@@ -14,14 +14,8 @@
 }
 
 
-.change-data-form-label{
-    text-align: left;
-    margin-left: 0;
-    padding-left: 0;
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--secondary-color);
+.change-data-form-label {
+    @include form-label($text-align: left, $margin-left: 0, $padding-left: 0);
 }
 
 .form-input-message-error{
@@ -32,15 +26,8 @@
     @include input-style(430px, 47px, 10px);
 }
 
-.change-data-form-error-message{
-    position: absolute;
-    margin: -45px 0 0;
-    color: var(--error-message-color);
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 11px;
-    padding: 0;
-    width: 430px;
+.change-data-form-error-message {
+    @include form-error-message($margin-top: -45px, $position: absolute, $width: 430px);
 }
 
 .change-data-form-button{

@@ -74,3 +74,31 @@
     margin-bottom: $margin-bottom;
     margin-right: $margin-right;
 }
+
+@mixin form-label($font-family: var(--secondary-font), $font-weight: 700, $font-size: 13px, $color: var(--secondary-color), $display: block, $margin-bottom: 0, $margin-left: 0, $padding-left: 0, $border: none, $text-align: left, $flex-wrap: nowrap) {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-size: $font-size;
+    color: $color;
+    display: $display;
+    margin-bottom: $margin-bottom;
+    margin-left: $margin-left;
+    padding-left: $padding-left;
+    border: $border;
+    text-align: $text-align;
+    flex-wrap: $flex-wrap;
+}
+
+@mixin form-error-message($margin-top: -40px, $margin-left: 0, $position: relative, $width: auto, $left: 0) {
+    position: $position;
+    margin: $margin-top 0 0 $margin-left;
+    display: block;
+    color: var(--error-message-color);
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    font-size: 11px;
+    padding: 0;
+    background-color: var(--white-color);
+    width: $width;
+    left: $left;
+}

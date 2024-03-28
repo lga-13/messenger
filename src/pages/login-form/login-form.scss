@@ -15,31 +15,16 @@
 }
 
 .login-form-label {
-    border: none;
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--secondary-color);
-    display: block;
-    margin-bottom: 0;
+    @include form-label($border: none);
 }
 
 .login-form-input {
     @include input-style(375px, 52px, 10px);
 }
 
-.login-form-error-message{
-    left: 0;
-    margin: -40px 0 0 ;
-    display: block;
-    color: var(--error-message-color);
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 11px;
-    padding: 0;
-    background-color: var(--white-color);
+.login-form-error-message {
+    @include form-error-message();
 }
-
 
 .login-form-forgot-password {
     display: block;

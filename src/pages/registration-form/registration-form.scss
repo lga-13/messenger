@@ -15,30 +15,15 @@
 }
 
 .registration-form-label {
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--secondary-color);
-    display: block;
-    margin: 0;
-    padding: 0;
+    @include form-label();
 }
-
 
 .registration-form-input {
     @include input-style(390px, 30px, 8px);
 }
 
-.registration-form-error-message{
-    left: 0;
-    margin: -28px 0 0 ;
-    display: block;
-    color: var(--error-message-color);
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 11px;
-    padding: 0;
-    background-color: var(--white-color);
+.registration-form-error-message {
+    @include form-error-message($margin-top: -28px);
 }
 
 .registration-form-button {
