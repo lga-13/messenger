@@ -13,7 +13,7 @@ https://www.figma.com/file/xdOf7R3w9O2uHnrRnHNGn7/Messanger?type=design&node-id=
 https://messenger-praktikum-glazarev.netlify.app/
 
 ### Технологии
-HTML, CSS, Vite, Handlebars(plugin Vite), Node.js
+HTML, CSS, Vite, Handlebars(plugin Vite), Node.js, TypeScript
 
 ### Команды для запуска проекта в dev-режиме
 ``` npm install ```
