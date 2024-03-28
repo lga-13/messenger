@@ -1,7 +1,4 @@
-@font-face {
-    font-family: Manuale;
-    src: url("../../public/static/fonts/Manuale/Manuale-Medium.ttf")
-}
+@import "../../public/static/styles/variables.pcss";
 
 .body {
     margin: 0;
@@ -18,7 +15,7 @@
 .chats-tape {
     width: 310px;
     height: 720px;
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
 }
 
 .chats-container-nav{
@@ -33,10 +30,10 @@
 }
 
 .chats-account {
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
     font-weight: 500;
     font-size: 12px;
-    color: #757575;
+    color: var(--light-grey-color);
     margin-top: 8px;
     padding-right: 10px;
     margin-left: auto;
@@ -49,12 +46,12 @@
     margin-top: 37px;
     margin-bottom: 15px;
     padding: 0;
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
     font-weight: 500;
     font-size: 12px;
     display: flex;
     border-radius: 7px;
-    background-color: #D9D9D9;
+    background-color: var(--light-background-color);
     align-items: center;
     justify-content: space-between;
 }
@@ -92,13 +89,15 @@
 hr {
     margin-top: 0;
     width: 310px;
-    color: #757575;
+    color: var(--light-grey-color);
     margin-bottom: 0;
     padding: 0;
 }
 
 hr:first-of-type{
     margin: 0;
+    top: 0;
+    position: sticky;
 }
 
 .chat-list{
@@ -109,7 +108,7 @@ hr:first-of-type{
 
 .chats-message {
     display: flex;
-    font-family: Manuale, sans-serif;
+    font-family: var(--main-font);
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
@@ -130,7 +129,7 @@ hr:first-of-type{
     gap: 8px;
     padding-top: 10px;
     padding-left: 5px;
-    background-color: #549ef54d;
+    background-color: var(--message-chain-active-chat);
 }
 
 .chats-img {
@@ -149,8 +148,8 @@ hr:first-of-type{
 }
 
 .chats-message-sender {
-    font-family: Inter, sans-serif;
-    color: black;
+    font-family: var(--secondary-font);
+    color: var(--black-color);
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 3px;
@@ -166,20 +165,20 @@ hr:first-of-type{
 }
 
 .chats-message-content {
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
     width: 193px;
     height: 30px;
     font-size: 12px;
     font-weight: 500;
-    color: #757575;
+    color: var(--light-grey-color);
     padding: 0;
 }
 
 .chats-your-message {
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
     font-size: 12px;
     font-weight: 500;
-    color: black;
+    color: var(--black-color);
     padding: 0;
 }
 
@@ -188,9 +187,9 @@ hr:first-of-type{
     flex-direction: column;
     align-items: flex-end;
     position: relative;
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
     font-weight: 500;
-    color: #757575;
+    color: var(--light-grey-color);
     margin-left: auto;
     padding-right: 5px;
 }
@@ -215,15 +214,15 @@ hr:first-of-type{
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #1D90D1;
-    color: #fff;
+    background-color: var(--main-color);
+    color: var(--white-color);
 }
 
 .chats-plug {
     width: 970px;
     height: 720px;
     border: none;
-    border-left: 1px solid #999;
+    border-left: 1px solid var(--secondary-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -231,8 +230,8 @@ hr:first-of-type{
 
 .chats-plug-message {
     text-align: center;
-    color: #1D90D1;
-    font-family: Manuale, sans-serif;
+    color: var(--main-color);
+    font-family: var(--main-font);
     font-weight: 500;
     font-size: 14px;
 }
@@ -242,13 +241,14 @@ hr:first-of-type{
     width: 970px;
     height: 720px;
     border: none;
-    border-left: 1px solid #999;
+    border-left: 1px solid var(--secondary-color);
 }
 
 .message-chain-header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 970px;
     height: 72px;
     margin-left: 10px;
@@ -266,9 +266,10 @@ hr:first-of-type{
 }
 
 .message-chain-header-title{
-    font-family: Manuale, sans-serif;
+    font-family: var(--main-font);
     font-weight: 700;
     font-size: 15px;
+    color: var(--black-color);
 }
 
 .message-chain-more-button{
@@ -283,9 +284,9 @@ hr:first-of-type{
     width: 970px;
     height: 597px;
     overflow: hidden auto;
-    background-color: #7492666B;
-    border-bottom: 1px solid #757575;
-    border-top: 1px solid #757575;
+    background-color: var(--message-chain-messages-window);
+    border-bottom: 1px solid var(--light-grey-color);
+    border-top: 1px solid var(--light-grey-color);
 }
 
 ::-webkit-scrollbar {
@@ -293,19 +294,19 @@ hr:first-of-type{
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #757575;
+    background: var(--light-grey-color);
     border-radius: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #EBEBEB;
+    background: var(--message-background-color);
 }
 
 .message-chain-data-title{
     padding: 15px;
     margin: 0;
-    font-family: Manuale, sans-serif;
-    color: #757575;
+    font-family: var(--main-font);
+    color: var(--light-grey-color);
     position: relative;
     text-align: center;
     font-size: 17px;
@@ -319,13 +320,13 @@ hr:first-of-type{
 
 .message-chain-sender-message{
     position: relative;
-    font-family: Manuale, sans-serif;
+    font-family: var(--main-font);
     font-weight: 700;
     font-size: 11px;
-    color: #575757;
+    color: var(--dark-grey-color);
     text-align: left;
-    border: 1px solid #EBEBEB;
-    background-color: #EBEBEB;
+    border: 1px solid var(--message-background-color);
+    background-color: var(--message-background-color);
     border-radius: 15px;
     min-width: 25px;
     padding: 5px;
@@ -342,13 +343,13 @@ hr:first-of-type{
 
 .message-chain-recipient-message{
     position: relative;
-    font-family: Manuale, sans-serif;
+    font-family: var(--main-font);
     font-weight: 700;
     font-size: 11px;
-    color: #575757;
+    color: var(--dark-grey-color);
     text-align: right;
-    border: 1px solid #EBEBEB;
-    background-color: #EBEBEB;
+    border: 1px solid var(--message-background-color);
+    background-color: var(--message-background-color);
     border-radius: 15px;
     padding: 5px;
     display: flex;
@@ -365,10 +366,10 @@ hr:first-of-type{
 }
 
 .message-chain-time-message{
-    font-family: Manuale, sans-serif;
+    font-family: var(--main-font);
     font-weight: 500;
     font-size: 9px;
-    color: #999;
+    color: var(--secondary-color);
     text-align: right;
     margin-top: 11px;
     height: 14px;
@@ -380,11 +381,11 @@ hr:first-of-type{
     padding: 0;
     margin-left: 3px;
     margin-bottom: 0;
-    color: #1D90D1;
+    color: var(--main-color);
 }
 
 .message-chain-unread{
-    color: #999;
+    color: var(--secondary-color);
 }
 
 
@@ -406,7 +407,7 @@ hr:first-of-type{
     height: 32px;
     border: none;
     border-radius: 20px;
-    background-color: #D9D9D9;
+    background-color: var(--light-background-color);
     padding-left: 10px;
     margin-top: 9px;
 }
