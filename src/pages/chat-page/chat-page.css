@@ -3,7 +3,7 @@
     src: url("../../public/static/fonts/Manuale/Manuale-Medium.ttf")
 }
 
-body {
+.body {
     margin: 0;
 }
 
