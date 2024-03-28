@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import './registration-form.css';
+import './registration-form.scss';
 import Form from '../../blocks/form/form.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
 import render from '../../utils/render.ts';

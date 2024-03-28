@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import './settings-page.css';
-import './change-data-form.css';
-import './change-password-form.css';
+import './settings-page.scss';
+import './change-data-form.scss';
+import './change-password-form.scss';
 import Block from '../../components/base/block.ts';
 import Img from '../../components/img/img.ts';
 import Link from '../../components/link/link.ts';

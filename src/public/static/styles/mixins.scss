@@ -1,0 +1,8 @@
+@mixin title($weight: 500, $size: 1em, $align: left, $margin-bottom: 0) {
+    font-family: var(--main-font);
+    font-weight: $weight;
+    font-size: $size;
+    text-align: $align;
+    margin-bottom: $margin-bottom;
+    color: var(--black-color);
+}

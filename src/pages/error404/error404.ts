@@ -1,7 +1,7 @@
 import Block from '../../components/base/block.ts';
 import ErrorCard from '../../blocks/error-card/error-card.ts';
 import greetings from '../error500/error500-template.ts';
-import './error404.css';
+import './error404.scss';
 import render from '../../utils/render.ts';
 
 export interface Error404BlockType {

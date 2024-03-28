@@ -1,44 +1,41 @@
-@import "../../public/static/styles/variables.pcss";
+@import "../../public/static/styles/variables.scss";
+@import "../../public/static/styles/mixins.scss";
 
-.registration-form {
-    width: 400px;
-    height: 740px;
+.login-form {
+    width: 380px;
+    height: 490px;
     margin: 118px auto;
     padding: 20px;
     border: 1px solid var(--main-color);
     border-radius: 20px;
 }
 
-.registration-form-title {
-    text-align: center;
-    margin-bottom : 21px;
-    font-family: var(--main-font);
-    font-weight: 500;
+.login-form-title {
+    @include title(500, 1.5em, center, 42px);
 }
 
-.registration-form-label {
+.login-form-label {
+    border: none;
     font-family: var(--secondary-font);
     font-weight: 700;
     font-size: 13px;
     color: var(--secondary-color);
     display: block;
-    margin: 0;
-    padding: 0;
+    margin-bottom: 0;
 }
 
-
-.registration-form-input {
-    width: 390px;
+.login-form-input {
+    width: 375px;
     padding: 0;
-    margin-bottom: 30px;
-    margin-top: 8px;
+    margin-bottom: 52px;
+    margin-top: 10px;
     border: none;
     border-bottom: 1px solid var(--black-color) ;
 }
 
-.registration-form-error-message{
+.login-form-error-message{
     left: 0;
-    margin: -28px 0 0 ;
+    margin: -40px 0 0 ;
     display: block;
     color: var(--error-message-color);
     font-family: var(--secondary-font);
@@ -48,11 +45,19 @@
     background-color: var(--white-color);
 }
 
-.registration-form-button {
-    position: absolute;
+
+.login-form-forgot-password {
     display: block;
-    margin: 30px auto 30px 55px;
-    padding: 0;
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 73px;
+    color: var(--main-color);
+}
+
+.login-form-button {
+    display: block;
+    margin: auto;
     width: 280px;
     height: 40px;
     background-color: var(--main-color);
@@ -63,23 +68,22 @@
     font-size: 17px;
 }
 
-.registration-form-login {
-    position: relative;
+.login-form-registration {
     display: flex;
     justify-content: center;
     font-family: var(--secondary-font);
     font-weight: 500;
     font-size: 14px;
     color: var(--black-color);
-    margin-top: 80px;
+    margin-top: 10px;
 }
 
 .form-toggle{
     position: relative;
     background: none;
     border: none;
-    margin-left: 393px;
-    bottom: 51px;
+    margin-left: 375px;
+    bottom: 72px;
     height: 0;
     color: var(--dark-grey-color);
 }

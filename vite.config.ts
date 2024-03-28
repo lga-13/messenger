@@ -2,6 +2,7 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
+
 export default defineConfig({
   root: resolve(__dirname, ''),
   build: {
@@ -22,7 +23,8 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @import "/src/public/static/styles/variables.pcss";
+          @import "/src/public/static/styles/variables.scss";
+          @import "/src/public/static/styles/mixins.scss";
         `,
       },
     },

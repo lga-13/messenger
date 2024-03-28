@@ -8,7 +8,7 @@ import chat2 from '../../public/static/img/chat2.svg';
 import ChatList from '../../blocks/chats_list/chats_list.ts';
 import { Validator } from '../../validators/field_validator.ts';
 import Form from '../../blocks/form/form.ts';
-import './chat-page.css';
+import './chat-page.scss';
 import render from '../../utils/render.ts';
 
 export interface IMessage {
