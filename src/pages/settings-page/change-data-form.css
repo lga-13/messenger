@@ -1,7 +1,4 @@
-@font-face {
-    font-family: Manuale;
-    src: url("../../public/static/fonts/Manuale/Manuale-Medium.ttf")
-}
+@import "../../public/static/styles/variables.pcss";
 
 .change-data-form{
     margin-top: 100px;
@@ -20,10 +17,10 @@
     text-align: left;
     margin-left: 0;
     padding-left: 0;
-    font-family: Inter, sans-serif;
+    font-family: var(--secondary-font);
     font-weight: 700;
     font-size: 13px;
-    color: #999;
+    color: var(--secondary-color);
 }
 
 .form-input-message-error{
@@ -36,7 +33,7 @@
     margin-top: 10px;
     margin-bottom: 47px;
     border: none;
-    border-bottom: 1px solid black ;
+    border-bottom: 1px solid var(--black-color);
 }
 
 .change-data-form-input:focus {
@@ -46,8 +43,8 @@
 .change-data-form-error-message{
     position: absolute;
     margin: -45px 0 0;
-    color: #DF6058;
-    font-family: Inter, sans-serif;
+    color: var(--error-message-color);
+    font-family: var(--secondary-font);
     font-weight: 700;
     font-size: 11px;
     padding: 0;
@@ -59,9 +56,9 @@
     margin-top: 51px;
     width: 280px;
     height: 40px;
-    background-color: #1D90D1;
-    color: white;
-    border: 1px solid #1D90D1;
+    background-color: var(--main-color);
+    color: var(--white-color);
+    border: 1px solid var(--main-color);
     border-radius: 20px;
     cursor: pointer;
     font-size: 17px;
