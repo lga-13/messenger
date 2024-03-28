@@ -28,11 +28,7 @@
 }
 
 .settings-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 98px;
-    height: 99px;
+    @include img-style(98px, 99px, absolute, 0, 0, 0, 0, 0);
 }
 
 .settings-change-img{
@@ -112,10 +108,7 @@
     font-size: 14px;
 }
 
-.settings-btn-back{
-    width: 28px;
-    height: 28px;
-    background: url("../../public/static/img/btn-back.svg");
-    border: none;
-    padding: 0;
+.settings-btn-back {
+    @include button-style(28px, 28px, transparent, black, none, 0, pointer, 0, "", 0, 0, inline-block, static);
+    background-image: url("../../public/static/img/btn-back.svg");
 }

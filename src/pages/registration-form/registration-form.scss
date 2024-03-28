@@ -26,12 +26,7 @@
 
 
 .registration-form-input {
-    width: 390px;
-    padding: 0;
-    margin-bottom: 30px;
-    margin-top: 8px;
-    border: none;
-    border-bottom: 1px solid var(--black-color) ;
+    @include input-style(390px, 30px, 8px);
 }
 
 .registration-form-error-message{
@@ -47,18 +42,7 @@
 }
 
 .registration-form-button {
-    position: absolute;
-    display: block;
-    margin: 30px auto 30px 55px;
-    padding: 0;
-    width: 280px;
-    height: 40px;
-    background-color: var(--main-color);
-    color: var(--white-color);
-    border: 1px solid var(--main-color);
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 17px;
+    @include button-style(280px, 40px, var(--main-color), var(--white-color), 1px solid var(--main-color), 20px, pointer, 17px, "", 0, 0, block, static);
 }
 
 .registration-form-login {

@@ -25,12 +25,7 @@
 }
 
 .login-form-input {
-    width: 375px;
-    padding: 0;
-    margin-bottom: 52px;
-    margin-top: 10px;
-    border: none;
-    border-bottom: 1px solid var(--black-color) ;
+    @include input-style(375px, 52px, 10px);
 }
 
 .login-form-error-message{
@@ -56,16 +51,7 @@
 }
 
 .login-form-button {
-    display: block;
-    margin: auto;
-    width: 280px;
-    height: 40px;
-    background-color: var(--main-color);
-    color: var(--white-color);
-    border: 1px solid var(--main-color);
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 17px;
+    @include button-style(280px, 40px, var(--main-color), var(--white-color), 1px solid var(--main-color), 20px, pointer, 17px, "", 0, 0, block, static);
 }
 
 .login-form-registration {

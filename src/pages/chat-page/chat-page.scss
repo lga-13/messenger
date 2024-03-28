@@ -58,16 +58,11 @@
 }
 
 .chats-search-input {
+    @include input-style(100%, 10px, 0, transparent, 0, 7px);
     position: relative;
-    width: 100%;
     flex-grow: 1;
-    border: none;
     background-color: transparent;
-    border-radius: 7px;
-    outline: none;
-    margin-bottom: 10px;
     margin-left: 5px;
-    padding: 0;
 }
 
 .chats-message-error{
@@ -79,12 +74,8 @@
 
 
 .chats-search-btn {
-    margin: 3px 5px 12px;
-    width: 20px;
-    height: 20px;
-    background: url("../../public/static/img/search.svg") no-repeat;
-    border: none;
-    padding: 0;
+    @include button-style(20px, 20px, transparent, black, none, 0, pointer, 0, "", 0, "3px 5px 12px", inline-block, static);
+    background-image: url("../../public/static/img/search.svg");
 }
 
 hr {
@@ -134,9 +125,7 @@ hr:first-of-type{
 }
 
 .chats-img {
-    display: block;
-    margin-top: 1px;
-    margin-bottom: 12px;
+    @include img-style(auto, auto, static, auto, auto, 1px, 12px, 0);
 }
 
 .chats-text {
@@ -260,22 +249,17 @@ hr:first-of-type{
     align-items: center;
 }
 
-.message-chain-img{
-    width: 47px;
-    height: 47px;
-    margin-right: 10px;
+.message-chain-img {
+    @include img-style(47px, 47px, static, auto, auto, 0, 0, 10px);
 }
 
 .message-chain-header-title {
     @include title(700, 15px);
 }
 
-.message-chain-more-button{
-    background: url("../../public/static/img/morebtn.svg") no-repeat;
-    width: 6px;
-    height: 25px;
-    margin: 24px 20px 24px auto;
-    border: none;
+.message-chain-more-button {
+    @include button-style(6px, 25px, transparent, black, none, 0, pointer, 0, "", 0, "24px 20px 24px auto", inline-block, static);
+    background-image: url("../../public/static/img/morebtn.svg");
 }
 
 .message-chain-message-chain{
@@ -300,15 +284,11 @@ hr:first-of-type{
     background: var(--message-background-color);
 }
 
-.message-chain-data-title{
+.message-chain-data-title {
+    @include title($weight: 700, $size: 15px, $align: center, $margin-bottom: 0, $color: var(--light-grey-color));
     padding: 15px;
     margin: 0;
-    font-family: var(--main-font);
-    color: var(--light-grey-color);
     position: relative;
-    text-align: center;
-    font-size: 17px;
-    font-weight: 700;
 }
 
 .message-chain-message-container{
@@ -316,51 +296,12 @@ hr:first-of-type{
     height: 70px;
 }
 
-.message-chain-sender-message{
-    position: relative;
-    font-family: var(--main-font);
-    font-weight: 700;
-    font-size: 11px;
-    color: var(--dark-grey-color);
-    text-align: left;
-    border: 1px solid var(--message-background-color);
-    background-color: var(--message-background-color);
-    border-radius: 15px;
-    min-width: 25px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    max-width: 300px;
-    overflow-wrap: break-word;
-    margin-right: 15px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    float: right;
-    clear: both;
+.message-chain-sender-message {
+    @include message($align: left, $float: right, $margin-side: 15px);
 }
 
-.message-chain-recipient-message{
-    position: relative;
-    font-family: var(--main-font);
-    font-weight: 700;
-    font-size: 11px;
-    color: var(--dark-grey-color);
-    text-align: right;
-    border: 1px solid var(--message-background-color);
-    background-color: var(--message-background-color);
-    border-radius: 15px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    min-height: 25px;
-    min-width: 25px;
-    max-width: 300px;
-    overflow-wrap: break-word;
-    margin-left: 15px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    float: left;
-    clear: both;
+.message-chain-recipient-message {
+    @include message($align: right, $float: left, $margin-side: 15px);
 }
 
 .message-chain-time-message{
@@ -400,34 +341,17 @@ hr:first-of-type{
     flex-direction: row;
 }
 
-.message-chain-message-input{
-    width: 862px;
+.message-chain-message-input {
+    @include input-style(862px, 0, 9px, var(--light-grey-color), '0 0 0 10px', 20px);
     height: 32px;
-    border: none;
-    border-radius: 20px;
-    background-color: var(--light-background-color);
-    padding-left: 10px;
-    margin-top: 9px;
 }
 
-.message-chain-message-input:focus{
-    outline: none;
+.message-chain-attachment-button {
+    @include button-style(24px, 24px, transparent, black, none, 0, pointer, 0, "", 0, "12px 10px 10px 12px", inline-block, static);
+    background-image: url("../../public/static/img/attachment.svg");
 }
 
-.message-chain-attachment-button{
-    margin: 12px 10px 10px 12px;
-    width: 24px;
-    height: 24px;
-    background: url("../../public/static/img/attachment.svg");
-    border: none;
-    padding: 0;
-}
-
-.message-chain-send-button{
-    margin: 12px 10px 10px 12px;
-    width: 28px;
-    height: 28px;
-    background: url("../../public/static/img/sendbtn.svg");
-    border: none;
-    padding: 0;
+.message-chain-send-button {
+    @include button-style(28px, 28px, transparent, black, none, 0, pointer, 0, "", 0, "12px 10px 10px 12px", inline-block, static);
+    background-image: url("../../public/static/img/sendbtn.svg");
 }
