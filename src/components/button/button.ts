@@ -12,7 +12,7 @@ export interface buttonBlockType {
     },
 }
 
-export default class Button extends Block {
+export default class Button extends Block<buttonBlockType> {
   constructor(props: buttonBlockType) {
     // Создаём враппер DOM-элемент button
     super('div', props);

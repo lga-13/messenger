@@ -7,7 +7,7 @@ export interface ErrorMessageBlockType {
     settings?: {withInternalID: boolean}
 }
 
-export default class ErrorMessage extends Block {
+export default class ErrorMessage extends Block<ErrorMessageBlockType> {
   constructor(props: ErrorMessageBlockType) {
     super('div', props);
   }

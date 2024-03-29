@@ -17,7 +17,7 @@ export interface fieldBlockType {
     settings?: { withInternalID: boolean };
 }
 
-export default class Field extends Block {
+export default class Field extends Block<fieldBlockType> {
   declare children: {
     fieldLabel: Label | null;
     fieldInput: Input;

@@ -9,7 +9,7 @@ export interface ImgBlockType {
     settings: {withInternalID: boolean}
 }
 
-export default class Img extends Block {
+export default class Img extends Block<ImgBlockType> {
   constructor(props: ImgBlockType) {
     super('div', props);
   }

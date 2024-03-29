@@ -8,7 +8,7 @@ export interface Error500BlockType {
     errorCard?: ErrorCard
 }
 
-class Error500Page extends Block {
+class Error500Page extends Block<Error500BlockType> {
   constructor(props: Error500BlockType) {
     props.errorCard = new ErrorCard(
       {

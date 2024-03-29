@@ -16,7 +16,7 @@ export interface FormProps {
 
 }
 
-export default class Form extends Block {
+export default class Form extends Block<FormProps> {
   declare children: {
     formTitle: Title | null,
     formFields: Field[],

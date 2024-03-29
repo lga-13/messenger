@@ -257,7 +257,7 @@ interface chatPageBlockType{
 
 }
 
-export default class ChatPage extends Block {
+export default class ChatPage extends Block<chatPageBlockType> {
   declare children: {
     searchForm: Form,
     accountLink: Link,
@@ -279,8 +279,13 @@ export default class ChatPage extends Block {
       srcName: chat2,
       sender_name: {
         className: 'message-chain-header-title',
-        text: '',
+        text: ' ZDAROVA ',
         tag: 'p',
+      },
+      moreButton: {
+        className: 'message-chain-more-button',
+        typeName: 'button',
+        text: '',
       },
       messageForm: {
         className: 'message-chain-send-field',
@@ -318,11 +323,6 @@ export default class ChatPage extends Block {
         text: '',
         settings: { withInternalID: true },
         events: { click: () => {} },
-      },
-      moreButton: {
-        className: 'message-chain-more-button',
-        typeName: 'button',
-        text: '',
       },
       chatListHook: () => { chatList.update(messageChain.userId); },
     });
