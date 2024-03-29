@@ -44,7 +44,18 @@ export interface SettingPageBlockType {
     settings?: {withInternalID: boolean},
 }
 
-export default class SettingsPage extends Block {
+interface SettingPageProps extends SettingPageBlockType {
+  avatar: string;
+  userData: {
+    login: string;
+    first_name: string;
+    second_name: string;
+    email: string;
+    phone: string;
+  };
+}
+
+export default class SettingsPage extends Block<SettingPageProps> {
   declare children: {
     settingsImg: Img,
     settingsLinkImg: Link,

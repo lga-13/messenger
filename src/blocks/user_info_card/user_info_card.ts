@@ -5,7 +5,7 @@ import Title from '../../components/title/title.ts';
 
 export interface UserInfoCardBlockType{}
 
-export class UserInfoCard extends Block {
+export class UserInfoCard extends Block<UserInfoCardBlockType> {
   declare children: {
     cardTitles: Title[]
   };

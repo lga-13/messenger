@@ -12,7 +12,7 @@ interface PlugBlockType{
     settings?: { withInternalID: true }
 }
 
-export default class Plug extends Block {
+export default class Plug extends Block<PlugBlockType> {
   declare children: {
       plugLink: Link
   };

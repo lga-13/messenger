@@ -8,7 +8,7 @@ export interface Error404BlockType {
     errorCard?: ErrorCard
 }
 
-class Error404Page extends Block {
+class Error404Page extends Block<Error404BlockType> {
   constructor(props: Error404BlockType) {
     props.errorCard = new ErrorCard(
       {

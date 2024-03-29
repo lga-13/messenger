@@ -16,7 +16,7 @@ interface ChatMiniatureBlockType {
     }
 }
 
-export default class ChatMiniature extends Block {
+export default class ChatMiniature extends Block<ChatMiniatureBlockType> {
   constructor(props: ChatMiniatureBlockType) {
     // Создаём враппер DOM-элемент button
     super('div', props);

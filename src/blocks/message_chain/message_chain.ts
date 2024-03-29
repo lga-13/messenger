@@ -21,10 +21,10 @@ export interface MessageChainBlockType {
     chatListHook: () => void,
 }
 
-export default class MessageChain extends Block {
+export default class MessageChain extends Block<MessageChainBlockType> {
   declare children: {
       messageChainMoreButton: Button,
-      chainMessages : Message[],
+      chainMessages : MessageContainer[],
       messageChainAttachmentsButton : Button,
       messageChainForm : Form,
       messageSenderName: Title,
