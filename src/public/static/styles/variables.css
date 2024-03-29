@@ -9,8 +9,11 @@
 }
 
 :root {
+  /* stylelint-disable-next-line value-keyword-case */
   --main-font: Manuale, sans-serif;
+  /* stylelint-disable-next-line value-keyword-case */
   --secondary-font: Inter, sans-serif;
+  /* stylelint-disable-next-line value-keyword-case */
   --thirdly-font: Montserrate, sans-serif;
   --main-color: #1D90D1;
   --secondary-color: #999;
