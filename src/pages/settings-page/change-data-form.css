@@ -1,4 +1,4 @@
-@import "../../public/static/styles/variables.pcss";
+@import url("../../public/static/styles/variables.pcss");
 
 .change-data-form{
     margin-top: 100px;
