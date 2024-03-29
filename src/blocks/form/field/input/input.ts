@@ -7,15 +7,12 @@ export interface inputBlockType {
     placeholder: string,
     inputType: string,
     settings?: {withInternalID: boolean},
-    events?: {
-        click: () => void
-    }
+    events?: Record<string, any>
 }
 
 export default class Input extends Block<inputBlockType> {
-  declare currentEvents: {
-        click: () => void
-    };
+  declare currentEvents: Record<string, any>
+
 
   constructor(props: inputBlockType) {
     super('div', props);
@@ -26,12 +23,15 @@ export default class Input extends Block<inputBlockType> {
   }
 
   addEvents() {
-    const { events = {} } = this.props;
+      const { events = {} as Record<string, Function> } = this.props;
     Object.keys(events).forEach((eventName) => {
       if (eventName === 'blur') {
         this.element.querySelector('input')?.addEventListener(eventName, events[eventName]);
       } else {
-        this.element.addEventListener(eventName, events[eventName]);
+          if (events[eventName]) {
+              this.element.addEventListener(eventName, events[eventName]);
+          }
+
       }
     });
 

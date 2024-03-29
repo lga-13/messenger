@@ -45,7 +45,7 @@ export default abstract class Block<Props extends Record<string, any> = {}> {
     };
     if (props.settings && props.settings.withInternalID) {
       this._id = makeUUID();
-      this.props = this._makePropsProxy({ ...props, __id: this._id });
+      this.props = this._makePropsProxy({ ...props, __id: this._id } as Props & { __id: string; settings?: any; });
     } else {
       this.props = this._makePropsProxy(props as Props);
     }
@@ -89,7 +89,7 @@ export default abstract class Block<Props extends Record<string, any> = {}> {
       set(target: Props, prop: string, value) {
         // Копируем текущие пропсы
         const oldProps: Props = { ...self.props };
-        target[prop] = value;
+        (target as any)[prop] = value;
 
         self.componentDidUpdate(oldProps, target);
         return true;
