@@ -11,7 +11,6 @@ import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
 
 export default abstract class Block<Props extends Record<string, any> = {}> {
-
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',

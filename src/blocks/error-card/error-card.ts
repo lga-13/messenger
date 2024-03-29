@@ -13,24 +13,23 @@ export interface Error500BlockType {
 }
 
 export default class ErrorCard extends Block<Error500BlockType> {
-
   declare children: {
       errorTitle: Title,
       errorMessage: ErrorMessage,
       errorLink: Link,
-  }
+  };
 
   constructor(props: Error500BlockType) {
     super('div', props);
   }
 
   addChildren() {
-      this.children.errorTitle = new Title(this.props.title);
-      this.children.errorMessage = new Title(this.props.message);
-      this.children.errorLink = new Link(this.props.link);
+    this.children.errorTitle = new Title(this.props.title);
+    this.children.errorMessage = new Title(this.props.message);
+    this.children.errorLink = new Link(this.props.link);
   }
 
-    render() {
+  render() {
     return this.compile(greetings, this.props);
   }
 }

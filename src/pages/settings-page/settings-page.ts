@@ -44,7 +44,6 @@ export interface SettingPageBlockType {
     settings?: {withInternalID: boolean},
 }
 
-
 interface SettingPageProps extends SettingPageBlockType {
   avatar: string;
   userData: {
@@ -55,7 +54,6 @@ interface SettingPageProps extends SettingPageBlockType {
     phone: string;
   };
 }
-
 
 export default class SettingsPage extends Block<SettingPageProps> {
   declare children: {
