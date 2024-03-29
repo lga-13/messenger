@@ -257,7 +257,7 @@ interface chatPageBlockType{
 
 }
 
-export default class ChatPage extends Block {
+export default class ChatPage extends Block<chatPageBlockType> {
   declare children: {
     searchForm: Form,
     accountLink: Link,

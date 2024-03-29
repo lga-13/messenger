@@ -10,7 +10,8 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
 
-export default abstract class Block {
+export default abstract class Block<Props extends Record<string, any> = unknown> {
+
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -22,11 +23,11 @@ export default abstract class Block {
 
   _element: HTMLElement;
 
-  _meta: {tagName: string, props: object};
+  _meta: {tagName: string, props: Props};
 
   currentEvents: Record<string, (event?: Event) => void>;
 
-  props: Record<string, any>;
+  props: Props;
 
   children: Record<string, Block | Block[] | null>;
 
@@ -38,7 +39,6 @@ export default abstract class Block {
     this._registerEvents(eventBus);
     const { children, props } = Block._getChildren(propsAndChildren);
     this.children = children;
-    // Запись в свойства
     this._meta = {
       tagName,
       props,

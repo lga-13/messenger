@@ -12,7 +12,7 @@ export interface inputBlockType {
     }
 }
 
-export default class Input extends Block {
+export default class Input extends Block<inputBlockType> {
   declare currentEvents: {
         click: () => void
     };

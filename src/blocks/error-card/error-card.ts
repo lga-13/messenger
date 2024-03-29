@@ -15,7 +15,7 @@ export interface Error500BlockType {
     settings?: { withInternalID: boolean }
 }
 
-export default class ErrorCard extends Block {
+export default class ErrorCard extends Block<Error500BlockType> {
   constructor(props: Error500BlockType) {
     props.errorTitle = new Title(props.title);
     props.errorMessage = new Title(props.message);

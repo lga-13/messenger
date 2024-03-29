@@ -11,7 +11,7 @@ export interface LinkBlockType {
     }
 }
 
-export default class Link extends Block {
+export default class Link extends Block<LinkBlockType> {
   constructor(props: LinkBlockType) {
     super('div', props);
   }
