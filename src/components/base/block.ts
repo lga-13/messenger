@@ -10,7 +10,7 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
 
-export default abstract class Block<Props extends Record<string, any> = unknown> {
+export default abstract class Block<Props extends Record<string, any> = {}> {
 
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
     INIT: 'init',
@@ -41,13 +41,13 @@ export default abstract class Block<Props extends Record<string, any> = unknown>
     this.children = children;
     this._meta = {
       tagName,
-      props,
+      props: props as Props,
     };
     if (props.settings && props.settings.withInternalID) {
       this._id = makeUUID();
       this.props = this._makePropsProxy({ ...props, __id: this._id });
     } else {
-      this.props = this._makePropsProxy(props);
+      this.props = this._makePropsProxy(props as Props);
     }
     eventBus.emit(Block.EVENTS.INIT);
   }
@@ -79,16 +79,16 @@ export default abstract class Block<Props extends Record<string, any> = unknown>
     eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdate.bind(this));
   }
 
-  _makePropsProxy(props: Record<string, any>) {
-    const self = this;
+  _makePropsProxy(props: Props) {
+    const self: Block<Props> = this;
     return new Proxy(props, {
-      get(target: Record<string, any>, prop: string) {
+      get(target: Props, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: Record<string, any>, prop: string, value) {
+      set(target: Props, prop: string, value) {
         // Копируем текущие пропсы
-        const oldProps = { ...self.props };
+        const oldProps: Props = { ...self.props };
         target[prop] = value;
 
         self.componentDidUpdate(oldProps, target);

@@ -8,7 +8,7 @@ export interface TitleBlockType {
     settings?: {withInternalID: boolean},
 }
 
-export default class Title extends Block {
+export default class Title extends Block<TitleBlockType> {
   declare props: TitleBlockType;
 
   constructor(props: TitleBlockType) {
