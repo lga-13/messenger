@@ -39,10 +39,7 @@ function setNewUserData(newData: Record<string, string>) {
   MOCK_USER_DATA = newData;
 }
 
-export interface SettingPageBlockType {
-    className: string,
-    settings?: {withInternalID: boolean},
-}
+export interface SettingPageBlockType {}
 
 interface SettingPageProps extends SettingPageBlockType {
   avatar: string;
@@ -412,11 +409,6 @@ export default class SettingsPage extends Block<SettingPageProps> {
   }
 }
 
-export const settingsPage = new SettingsPage(
-  {
-    className: 'settings-page',
-    settings: { withInternalID: true },
-  },
-);
+export const settingsPage = new SettingsPage({});
 
 render('#app', settingsPage);

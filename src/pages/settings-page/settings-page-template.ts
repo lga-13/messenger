@@ -1,7 +1,7 @@
 // language=hbs
 
 export default `
-    <div class="{{className}}">
+    <div class='settings-page'>
         <form class="settings-data">
             <div class="settings-page-img">
                 {{{ settingsImg }}}
