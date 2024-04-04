@@ -341,7 +341,7 @@ class ChatPage extends Block<chatPageBlockType> {
 
     this.children.accountLink = new Link({
       className: 'chats-account',
-      href: '/src/pages/settings-page/settings-page.html',
+      href: '/settings',
       text: 'Аккаунт',
     });
 

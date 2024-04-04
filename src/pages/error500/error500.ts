@@ -10,7 +10,6 @@ export interface Error500BlockType {
 
 class Error500Page extends Block<Error500BlockType> {
   constructor(props: Error500BlockType) {
-      console.log(props);
       props.errorCard = new ErrorCard(
       {
         className: 'h1',

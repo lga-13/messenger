@@ -381,7 +381,7 @@ class SettingsPage extends Block<SettingPageProps> {
     this.children.settingsExitLink = new Link(
       {
         className: 'settings-change-exit',
-        href: '/src/pages/login-form/login-form.html',
+        href: '/login',
         text: 'Выйти из аккаунта',
         settings: { withInternalID: true },
       },
