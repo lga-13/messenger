@@ -52,7 +52,7 @@ interface SettingPageProps extends SettingPageBlockType {
   };
 }
 
-export default class SettingsPage extends Block<SettingPageProps> {
+class SettingsPage extends Block<SettingPageProps> {
   declare children: {
     settingsImg: Img,
     settingsLinkImg: Link,
@@ -409,6 +409,4 @@ export default class SettingsPage extends Block<SettingPageProps> {
   }
 }
 
-export const settingsPage = new SettingsPage({});
-
-render('#app', settingsPage);
+export default SettingsPage

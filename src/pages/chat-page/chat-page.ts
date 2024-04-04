@@ -257,7 +257,7 @@ interface chatPageBlockType{
 
 }
 
-export default class ChatPage extends Block<chatPageBlockType> {
+class ChatPage extends Block<chatPageBlockType> {
   declare children: {
     searchForm: Form,
     accountLink: Link,
@@ -389,6 +389,5 @@ export default class ChatPage extends Block<chatPageBlockType> {
   }
 }
 
-export const chatPage = new ChatPage({});
 
-render('#app', chatPage);
+export default ChatPage;
