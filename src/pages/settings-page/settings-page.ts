@@ -14,6 +14,7 @@ import avatar from '../../public/static/img/avatar.svg';
 import { UserInfoCard } from '../../blocks/user_info_card/user_info_card.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
 import render from '../../utils/render.ts';
+import Title from "../../components/title/title.ts";
 
 export interface userDataInterface {
   login: string,
@@ -60,8 +61,8 @@ class SettingsPage extends Block<SettingPageProps> {
     changeDataForm: Form,
     changePasswordForm: Form,
     settingsPlug: Plug,
-    settingsDataLink: Link,
-    settingsPasswordLink: Link,
+    settingsDataLink: Title,
+    settingsPasswordLink: Title,
     settingsExitLink: Link,
     buttonBlueBack: Button
   };
@@ -346,10 +347,10 @@ class SettingsPage extends Block<SettingPageProps> {
     );
     this.children.settingsPlug = settingsPlug;
 
-    this.children.settingsDataLink = new Link(
+    this.children.settingsDataLink = new Title(
       {
         className: 'settings-change-data',
-        href: '#',
+        tag: 'h2',
         text: 'Изменить личные данные',
         settings: { withInternalID: true },
         events: {
@@ -362,10 +363,10 @@ class SettingsPage extends Block<SettingPageProps> {
       },
     );
 
-    this.children.settingsPasswordLink = new Link(
+    this.children.settingsPasswordLink = new Title(
       {
         className: 'settings-change-password',
-        href: '#',
+        tag: 'h2',
         text: 'Сменить пароль',
         settings: { withInternalID: true },
         events: {
