@@ -329,15 +329,14 @@ class ChatPage extends Block<chatPageBlockType> {
     this.children.messageChain = messageChain;
     this.children.messageChain.hide();
 
-    const chatPlug = new Plug({
+    this.children.chatPlug = new Plug({
       className: 'chats-plug',
-      link: {
+      title: {
         className: 'chats-plug-message',
-        href: '#',
+        tag: 'h2',
         text: 'Выберите чат, чтобы начать общаться.',
       },
     });
-    this.children.chatPlug = chatPlug;
 
     this.children.accountLink = new Link({
       className: 'chats-account',

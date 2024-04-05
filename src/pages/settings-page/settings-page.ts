@@ -92,7 +92,7 @@ class SettingsPage extends Block<SettingPageProps> {
       },
     );
 
-    const userInfoCard = new UserInfoCard({});
+    const userInfoCard = new UserInfoCard( {});
     this.children.userInfoCard = userInfoCard;
 
     const changeDataForm = new Form(
@@ -338,9 +338,9 @@ class SettingsPage extends Block<SettingPageProps> {
     const settingsPlug = new Plug(
       {
         className: 'plug',
-        link: {
+        title: {
           className: 'settings-window-link',
-          href: '#',
+          tag: 'h2',
           text: 'Выберите, какие изменения хотите внести.',
         },
       },

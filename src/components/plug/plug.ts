@@ -1,20 +1,20 @@
 import Block from '../base/block.ts';
 import greetings from './plug-template.ts';
-import Link from '../link/link.ts';
+import Title from "../title/title.ts";
 
 interface PlugBlockType{
     className: string,
-    link: {
+    title: {
         className:string,
-        href: string,
-        text: string
+        text: string,
+        tag: string
     },
     settings?: { withInternalID: true }
 }
 
 export default class Plug extends Block<PlugBlockType> {
   declare children: {
-      plugLink: Link
+      plugLink: Title
   };
 
   declare props: PlugBlockType;
@@ -27,11 +27,10 @@ export default class Plug extends Block<PlugBlockType> {
   }
 
   addChildren() {
-    this.children.plugLink = new Link({
-      className: this.props.link.className,
-      href: this.props.link.href,
-      text: this.props.link.text,
-
+    this.children.plugLink = new Title({
+      className: this.props.title.className,
+      text: this.props.title.text,
+      tag: this.props.title.tag,
     });
   }
 
