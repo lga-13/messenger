@@ -9,7 +9,6 @@ import ChatList from '../../blocks/chats_list/chats_list.ts';
 import { Validator } from '../../validators/field_validator.ts';
 import Form from '../../blocks/form/form.ts';
 import './chat-page.css';
-import render from '../../utils/render.ts';
 
 export interface IMessage {
   me: boolean;
@@ -387,6 +386,5 @@ class ChatPage extends Block<chatPageBlockType> {
     return this.compile(greetings, this.props);
   }
 }
-
 
 export default ChatPage;

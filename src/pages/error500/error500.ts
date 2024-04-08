@@ -3,14 +3,13 @@ import greetings from './error500-template.ts';
 import ErrorCard from '../../blocks/error-card/error-card.ts';
 import './error500.css';
 
-
 export interface Error500BlockType {
     errorCard?: ErrorCard
 }
 
 class Error500Page extends Block<Error500BlockType> {
   constructor(props: Error500BlockType) {
-      props.errorCard = new ErrorCard(
+    props.errorCard = new ErrorCard(
       {
         className: 'h1',
         title: {
@@ -38,5 +37,4 @@ class Error500Page extends Block<Error500BlockType> {
   }
 }
 
-
-export default Error500Page
+export default Error500Page;

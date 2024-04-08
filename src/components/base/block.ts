@@ -9,7 +9,6 @@
 import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
-import {CountQueuingStrategy} from "node:stream/web";
 
 export default abstract class Block<Props extends Record<string, any> = {}> {
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
@@ -243,7 +242,6 @@ export default abstract class Block<Props extends Record<string, any> = {}> {
       this._element.addEventListener(eventName, events[eventName]);
     });
     this.currentEvents = events;
-
   }
 
   _removeEvents() {

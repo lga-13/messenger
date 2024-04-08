@@ -1,6 +1,6 @@
 import Block from '../base/block.ts';
 import greetings from './plug-template.ts';
-import Title from "../title/title.ts";
+import Title from '../title/title.ts';
 
 interface PlugBlockType{
     className: string,
