@@ -9,18 +9,24 @@ export interface Error500BlockType {
     title: TitleBlockType
     message: TitleBlockType
     link: LinkBlockType,
-    errorTitle?: Title,
-    errorMessage?: ErrorMessage,
-    errorLink?: Link,
     settings?: { withInternalID: boolean }
 }
 
-export default class ErrorCard extends Block {
+export default class ErrorCard extends Block<Error500BlockType> {
+  declare children: {
+      errorTitle: Title,
+      errorMessage: ErrorMessage,
+      errorLink: Link,
+  };
+
   constructor(props: Error500BlockType) {
-    props.errorTitle = new Title(props.title);
-    props.errorMessage = new Title(props.message);
-    props.errorLink = new Link(props.link);
     super('div', props);
+  }
+
+  addChildren() {
+    this.children.errorTitle = new Title(this.props.title);
+    this.children.errorMessage = new Title(this.props.message);
+    this.children.errorLink = new Link(this.props.link);
   }
 
   render() {

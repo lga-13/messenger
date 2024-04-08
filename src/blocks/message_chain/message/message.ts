@@ -9,7 +9,7 @@ export interface MessageBlockType{
     settings?: {withInternalID: boolean}
 }
 
-export default class Message extends Block {
+export default class Message extends Block<MessageBlockType> {
   constructor(props: MessageBlockType) {
     super('div', props);
   }

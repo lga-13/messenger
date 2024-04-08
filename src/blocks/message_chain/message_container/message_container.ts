@@ -8,7 +8,7 @@ export interface MessageContainerBlockType{
     message: Message,
 }
 
-export default class MessageContainer extends Block {
+export default class MessageContainer extends Block<MessageContainerBlockType> {
   constructor(props: MessageContainerBlockType) {
     super('div', props);
   }

@@ -9,7 +9,6 @@ import ChatList from '../../blocks/chats_list/chats_list.ts';
 import { Validator } from '../../validators/field_validator.ts';
 import Form from '../../blocks/form/form.ts';
 import './chat-page.css';
-import render from '../../utils/render.ts';
 
 export interface IMessage {
   me: boolean;
@@ -257,7 +256,7 @@ interface chatPageBlockType{
 
 }
 
-export default class ChatPage extends Block {
+class ChatPage extends Block<chatPageBlockType> {
   declare children: {
     searchForm: Form,
     accountLink: Link,
@@ -279,8 +278,13 @@ export default class ChatPage extends Block {
       srcName: chat2,
       sender_name: {
         className: 'message-chain-header-title',
-        text: '',
+        text: ' ZDAROVA ',
         tag: 'p',
+      },
+      moreButton: {
+        className: 'message-chain-more-button',
+        typeName: 'button',
+        text: '',
       },
       messageForm: {
         className: 'message-chain-send-field',
@@ -319,29 +323,23 @@ export default class ChatPage extends Block {
         settings: { withInternalID: true },
         events: { click: () => {} },
       },
-      moreButton: {
-        className: 'message-chain-more-button',
-        typeName: 'button',
-        text: '',
-      },
       chatListHook: () => { chatList.update(messageChain.userId); },
     });
     this.children.messageChain = messageChain;
     this.children.messageChain.hide();
 
-    const chatPlug = new Plug({
+    this.children.chatPlug = new Plug({
       className: 'chats-plug',
-      link: {
+      title: {
         className: 'chats-plug-message',
-        href: '#',
+        tag: 'h2',
         text: 'Выберите чат, чтобы начать общаться.',
       },
     });
-    this.children.chatPlug = chatPlug;
 
     this.children.accountLink = new Link({
       className: 'chats-account',
-      href: '/src/pages/settings-page/settings-page.html',
+      href: '/settings',
       text: 'Аккаунт',
     });
 
@@ -389,6 +387,4 @@ export default class ChatPage extends Block {
   }
 }
 
-export const chatPage = new ChatPage({});
-
-render('#app', chatPage);
+export default ChatPage;

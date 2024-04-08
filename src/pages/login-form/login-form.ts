@@ -3,91 +3,105 @@
 import './login-form.css';
 import Form from '../../blocks/form/form.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
-import render from '../../utils/render.ts';
+import Block from '../../components/base/block.ts';
+import greetings from './login_form-template.ts';
 
-const loginForm = new Form(
-  {
-    className: 'login-form',
+export interface LoginFormBlockType {}
 
-    title: {
-      className: 'login-form-title',
-      text: 'Войти',
-      tag: 'h2',
-      settings: { withInternalID: true },
-    },
+class LoginForm extends Block<LoginFormBlockType> {
+  constructor(props: LoginFormBlockType) {
+    super('div', props);
+  }
 
-    button: {
-      className: 'login-form-button',
-      typeName: 'button',
-      text: 'Войти',
-      settings: { withInternalID: true },
-      events: {
-        click: () => {
-          if (loginForm.validate()) {
-            const data = loginForm.get_data();
-            console.log(data);
-            loginForm.clear();
-          }
-        },
-      },
-    },
-
-    link: {
-      className: 'login-form-registration',
-      href: '/src/pages/registration-form/registration-form.html',
-      text: 'Еще не зарегестрированы?',
-      settings: { withInternalID: true },
-    },
-    fields: [
+  addChildren() {
+    const loginForm = new Form(
       {
-        label: {
-          className: 'login-form-label',
-          text: 'Логин',
+        className: 'login-form',
+
+        title: {
+          className: 'login-form-title',
+          text: 'Войти',
+          tag: 'h2',
           settings: { withInternalID: true },
         },
-        input: {
-          className: 'login-form-input',
-          name: 'login',
-          placeholder: '',
-          inputType: 'text',
+
+        button: {
+          className: 'login-form-button',
+          typeName: 'button',
+          text: 'Войти',
           settings: { withInternalID: true },
+          events: {
+            click: () => {
+              if (loginForm.validate()) {
+                const data = loginForm.get_data();
+                console.log(data);
+                loginForm.clear();
+              }
+            },
+          },
         },
-        errorMessage: {
-          className: 'login-form-error-message',
-          text: ErrorMessages.validateLogin,
-          settings: { withInternalID: true },
-        },
-        validator: Validator.validateLogin,
-      },
-      {
-        label: {
-          className: 'login-form-label',
-          text: 'Пароль',
-          settings: { withInternalID: true },
-        },
-        input: {
-          className: 'login-form-input',
-          name: 'password',
-          placeholder: '',
-          inputType: 'password',
-          settings: { withInternalID: true },
-        },
-        errorMessage: {
-          className: 'login-form-error-message',
-          text: ErrorMessages.validatePassword,
-          settings: { withInternalID: true },
-        },
-        validator: Validator.validatePassword,
+
         link: {
-          className: 'login-form-forgot-password',
-          href: '#',
-          text: 'Забыли пароль?',
+          className: 'login-form-registration',
+          href: '/sign-up',
+          text: 'Еще не зарегестрированы?',
+          settings: { withInternalID: true },
         },
+        fields: [
+          {
+            label: {
+              className: 'login-form-label',
+              text: 'Логин',
+              settings: { withInternalID: true },
+            },
+            input: {
+              className: 'login-form-input',
+              name: 'login',
+              placeholder: '',
+              inputType: 'text',
+              settings: { withInternalID: true },
+            },
+            errorMessage: {
+              className: 'login-form-error-message',
+              text: ErrorMessages.validateLogin,
+              settings: { withInternalID: true },
+            },
+            validator: Validator.validateLogin,
+          },
+          {
+            label: {
+              className: 'login-form-label',
+              text: 'Пароль',
+              settings: { withInternalID: true },
+            },
+            input: {
+              className: 'login-form-input',
+              name: 'password',
+              placeholder: '',
+              inputType: 'password',
+              settings: { withInternalID: true },
+            },
+            errorMessage: {
+              className: 'login-form-error-message',
+              text: ErrorMessages.validatePassword,
+              settings: { withInternalID: true },
+            },
+            validator: Validator.validatePassword,
+            link: {
+              className: 'login-form-forgot-password',
+              href: '#',
+              text: 'Забыли пароль?',
+            },
+          },
+        ],
       },
-    ],
-  },
-);
+    );
+    this.children.loginForm = loginForm;
+  }
 
-export default loginForm;
+  render() {
+    return this.compile(greetings, this.props);
+  }
+}
 
-render('#app', loginForm);
+export default LoginForm;

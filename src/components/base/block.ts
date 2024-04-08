@@ -10,7 +10,7 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import EventBus from './event-bus.ts';
 
-export default abstract class Block {
+export default abstract class Block<Props extends Record<string, any> = {}> {
   static EVENTS: {INIT: string, FLOW_CDM: string, FLOW_RENDER: string, FLOW_CDU: string} = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -22,11 +22,11 @@ export default abstract class Block {
 
   _element: HTMLElement;
 
-  _meta: {tagName: string, props: object};
+  _meta: {tagName: string, props: Props};
 
   currentEvents: Record<string, (event?: Event) => void>;
 
-  props: Record<string, any>;
+  props: Props;
 
   children: Record<string, Block | Block[] | null>;
 
@@ -38,16 +38,15 @@ export default abstract class Block {
     this._registerEvents(eventBus);
     const { children, props } = Block._getChildren(propsAndChildren);
     this.children = children;
-    // Запись в свойства
     this._meta = {
       tagName,
-      props,
+      props: props as Props,
     };
     if (props.settings && props.settings.withInternalID) {
       this._id = makeUUID();
-      this.props = this._makePropsProxy({ ...props, __id: this._id });
+      this.props = this._makePropsProxy({ ...props, __id: this._id } as Props & { __id: string; settings?: any; });
     } else {
-      this.props = this._makePropsProxy(props);
+      this.props = this._makePropsProxy(props as Props);
     }
     eventBus.emit(Block.EVENTS.INIT);
   }
@@ -79,17 +78,17 @@ export default abstract class Block {
     eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdate.bind(this));
   }
 
-  _makePropsProxy(props: Record<string, any>) {
-    const self = this;
+  _makePropsProxy(props: Props) {
+    const self: Block<Props> = this;
     return new Proxy(props, {
-      get(target: Record<string, any>, prop: string) {
+      get(target: Props, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: Record<string, any>, prop: string, value) {
+      set(target: Props, prop: string, value) {
         // Копируем текущие пропсы
-        const oldProps = { ...self.props };
-        target[prop] = value;
+        const oldProps: Props = { ...self.props };
+        (target as any)[prop] = value;
 
         self.componentDidUpdate(oldProps, target);
         return true;

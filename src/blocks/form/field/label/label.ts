@@ -7,7 +7,7 @@ export interface labelBlockType {
     settings?: {withInternalID: boolean}
 }
 
-export default class Label extends Block {
+export default class Label extends Block<labelBlockType> {
   constructor(props: labelBlockType) {
     super('div', props);
   }
