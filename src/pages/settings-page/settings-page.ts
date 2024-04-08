@@ -14,6 +14,7 @@ import avatar from '../../public/static/img/avatar.svg';
 import { UserInfoCard } from '../../blocks/user_info_card/user_info_card.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
 import render from '../../utils/render.ts';
+import Title from "../../components/title/title.ts";
 
 export interface userDataInterface {
   login: string,
@@ -39,10 +40,7 @@ function setNewUserData(newData: Record<string, string>) {
   MOCK_USER_DATA = newData;
 }
 
-export interface SettingPageBlockType {
-    className: string,
-    settings?: {withInternalID: boolean},
-}
+export interface SettingPageBlockType {}
 
 interface SettingPageProps extends SettingPageBlockType {
   avatar: string;
@@ -55,7 +53,7 @@ interface SettingPageProps extends SettingPageBlockType {
   };
 }
 
-export default class SettingsPage extends Block<SettingPageProps> {
+class SettingsPage extends Block<SettingPageProps> {
   declare children: {
     settingsImg: Img,
     settingsLinkImg: Link,
@@ -63,8 +61,8 @@ export default class SettingsPage extends Block<SettingPageProps> {
     changeDataForm: Form,
     changePasswordForm: Form,
     settingsPlug: Plug,
-    settingsDataLink: Link,
-    settingsPasswordLink: Link,
+    settingsDataLink: Title,
+    settingsPasswordLink: Title,
     settingsExitLink: Link,
     buttonBlueBack: Button
   };
@@ -94,7 +92,7 @@ export default class SettingsPage extends Block<SettingPageProps> {
       },
     );
 
-    const userInfoCard = new UserInfoCard({});
+    const userInfoCard = new UserInfoCard( {});
     this.children.userInfoCard = userInfoCard;
 
     const changeDataForm = new Form(
@@ -340,19 +338,19 @@ export default class SettingsPage extends Block<SettingPageProps> {
     const settingsPlug = new Plug(
       {
         className: 'plug',
-        link: {
+        title: {
           className: 'settings-window-link',
-          href: '#',
+          tag: 'h2',
           text: 'Выберите, какие изменения хотите внести.',
         },
       },
     );
     this.children.settingsPlug = settingsPlug;
 
-    this.children.settingsDataLink = new Link(
+    this.children.settingsDataLink = new Title(
       {
         className: 'settings-change-data',
-        href: '#',
+        tag: 'h2',
         text: 'Изменить личные данные',
         settings: { withInternalID: true },
         events: {
@@ -365,10 +363,10 @@ export default class SettingsPage extends Block<SettingPageProps> {
       },
     );
 
-    this.children.settingsPasswordLink = new Link(
+    this.children.settingsPasswordLink = new Title(
       {
         className: 'settings-change-password',
-        href: '#',
+        tag: 'h2',
         text: 'Сменить пароль',
         settings: { withInternalID: true },
         events: {
@@ -384,7 +382,7 @@ export default class SettingsPage extends Block<SettingPageProps> {
     this.children.settingsExitLink = new Link(
       {
         className: 'settings-change-exit',
-        href: '/src/pages/login-form/login-form.html',
+        href: '/login',
         text: 'Выйти из аккаунта',
         settings: { withInternalID: true },
       },
@@ -412,11 +410,4 @@ export default class SettingsPage extends Block<SettingPageProps> {
   }
 }
 
-export const settingsPage = new SettingsPage(
-  {
-    className: 'settings-page',
-    settings: { withInternalID: true },
-  },
-);
-
-render('#app', settingsPage);
+export default SettingsPage

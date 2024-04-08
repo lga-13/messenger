@@ -37,6 +37,5 @@ class Error404Page extends Block<Error404BlockType> {
     return this.compile(greetings, this.props);
   }
 }
-export const error404Page = new Error404Page({});
 
-render('#app', error404Page);
+export default Error404Page

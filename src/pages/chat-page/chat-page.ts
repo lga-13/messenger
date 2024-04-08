@@ -257,7 +257,7 @@ interface chatPageBlockType{
 
 }
 
-export default class ChatPage extends Block<chatPageBlockType> {
+class ChatPage extends Block<chatPageBlockType> {
   declare children: {
     searchForm: Form,
     accountLink: Link,
@@ -329,19 +329,18 @@ export default class ChatPage extends Block<chatPageBlockType> {
     this.children.messageChain = messageChain;
     this.children.messageChain.hide();
 
-    const chatPlug = new Plug({
+    this.children.chatPlug = new Plug({
       className: 'chats-plug',
-      link: {
+      title: {
         className: 'chats-plug-message',
-        href: '#',
+        tag: 'h2',
         text: 'Выберите чат, чтобы начать общаться.',
       },
     });
-    this.children.chatPlug = chatPlug;
 
     this.children.accountLink = new Link({
       className: 'chats-account',
-      href: '/src/pages/settings-page/settings-page.html',
+      href: '/settings',
       text: 'Аккаунт',
     });
 
@@ -389,6 +388,5 @@ export default class ChatPage extends Block<chatPageBlockType> {
   }
 }
 
-export const chatPage = new ChatPage({});
 
-render('#app', chatPage);
+export default ChatPage;

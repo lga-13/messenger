@@ -6,6 +6,9 @@ export interface TitleBlockType {
     text: string,
     tag: string,
     settings?: {withInternalID: boolean},
+    events?: {
+        click: () => void,
+    }
 }
 
 export default class Title extends Block<TitleBlockType> {
