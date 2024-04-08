@@ -2,7 +2,6 @@ import Block from '../../components/base/block.ts';
 import ErrorCard from '../../blocks/error-card/error-card.ts';
 import greetings from '../error500/error500-template.ts';
 import './error404.css';
-import render from '../../utils/render.ts';
 
 export interface Error404BlockType {
     errorCard?: ErrorCard
@@ -38,4 +37,4 @@ class Error404Page extends Block<Error404BlockType> {
   }
 }
 
-export default Error404Page
+export default Error404Page;

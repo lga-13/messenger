@@ -13,8 +13,7 @@ import Form from '../../blocks/form/form.ts';
 import avatar from '../../public/static/img/avatar.svg';
 import { UserInfoCard } from '../../blocks/user_info_card/user_info_card.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
-import render from '../../utils/render.ts';
-import Title from "../../components/title/title.ts";
+import Title from '../../components/title/title.ts';
 
 export interface userDataInterface {
   login: string,
@@ -92,7 +91,7 @@ class SettingsPage extends Block<SettingPageProps> {
       },
     );
 
-    const userInfoCard = new UserInfoCard( {});
+    const userInfoCard = new UserInfoCard({});
     this.children.userInfoCard = userInfoCard;
 
     const changeDataForm = new Form(
@@ -382,7 +381,7 @@ class SettingsPage extends Block<SettingPageProps> {
     this.children.settingsExitLink = new Link(
       {
         className: 'settings-change-exit',
-        href: '/login',
+        href: '/',
         text: 'Выйти из аккаунта',
         settings: { withInternalID: true },
       },
@@ -410,4 +409,4 @@ class SettingsPage extends Block<SettingPageProps> {
   }
 }
 
-export default SettingsPage
+export default SettingsPage;
