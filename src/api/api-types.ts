@@ -23,3 +23,25 @@ export interface ChatsGetDataType {
 export interface ChatCreateDataType {
     title: string,
 }
+
+export interface DeleteChatDataType {
+    chatId: string,
+}
+
+export interface ArchiveChatDataType {
+    chatId: string,
+}
+
+export interface ArchiveChatsGetDataType {
+    offset: string,
+    limit: string,
+    title: string,
+}
+
+export interface UnarchiveChatDataType {
+    chatId: string,
+}
+
+export interface AvatarChatDataType {
+    chatId: string,
+}

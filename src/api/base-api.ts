@@ -7,4 +7,6 @@ export class BaseAPI {
     update() { throw new Error('Not implemented'); }
 
     delete() { throw new Error('Not implemented'); }
+
+    replace() { throw new Error('Not implemented'); }
 }
