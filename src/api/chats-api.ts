@@ -5,7 +5,7 @@ import {BaseAPI} from "./base-api.ts";
 const chatAPIInstance = new HTTP(HTTP.prefixes.HTTPS, "ya-praktikum.tech", 80, '/api/v2/chats');
 
 
-class ChatAPI extends BaseAPI {
+class ChatsApi extends BaseAPI {
 
     request() {
         chatAPIInstance.get('/', {id: "1"}, {id: "1"})
@@ -25,8 +25,3 @@ class ChatAPI extends BaseAPI {
             .catch(error => {throw error});
     }
 }
-
-let chatApi = new ChatAPI()
-console.log(chatApi.request())
-console.log(chatApi.create())
-console.log(chatApi.delete())
