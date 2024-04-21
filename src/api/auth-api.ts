@@ -53,6 +53,7 @@ class SignInAPI extends BaseAPI {
     }
 }
 
+
 class UserAPI extends BaseAPI {
     request() {
         return authAPIInstance.get(
