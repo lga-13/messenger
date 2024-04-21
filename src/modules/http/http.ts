@@ -4,7 +4,7 @@ import {
     ForbiddenHttpError,
     MethodNotAllowedHttpError,
     NonAuthorizedHttpError,
-    NotFoundHttpError, ServerError
+    NotFoundHttpError, RequestServerDataConflictError, ServerError
 } from "./http-exceptions.ts";
 
 enum HttpRequestMethods {
@@ -26,36 +26,50 @@ class HTTP {
     host: string;
 
     constructor(prefix: HttpPrefixes, host: string, port: number, base_path: string | null = null) {
-        this.host = stripSlash(prefix) + "://" + stripSlash(host) + ":" + port + "/"
-        if(base_path)  {
-            this.host += stripSlash(base_path) + "/";
+        this.host = HTTP.constructBasePath(prefix, host, port, base_path);
+    }
+
+    static constructBasePath(prefix: HttpPrefixes, host: string, port: number, base_path: string | null = null) {
+        let result = stripSlash(prefix) + "://" + stripSlash(host)
+        if (port != 80) {
+            result += ":" + port
         }
+
+        if(base_path)  {
+            result += "/"
+            result += stripSlash(base_path) + "/";
+        }
+        return result;
+
     }
 
     private constructUrl(path: string, queryParams: Record<string, string>): string {
         let queryString = new URLSearchParams(queryParams).toString();
         let firstSlash = "/"
-        if (path === "/") {
+        if (path === "/" || !queryParams) {
             firstSlash = "";
         }
         return  this.host + stripSlash(path) + firstSlash + (queryString? "?" + queryString: "");
     }
 
     private onLoad(xhrObject: XMLHttpRequest): string{
+        console.log(xhrObject);
         if (xhrObject.status === 200) {
             return xhrObject.responseText
         } else if (xhrObject.status === 204) {
             return
         }else if (xhrObject.status === 400) {
-            throw new BadRequestError("Неверный запрос.")
+            throw new BadRequestError("Неверный запрос. Причина ошибки: " + xhrObject.responseText)
         } else if (xhrObject.status === 401) {
-            throw new NonAuthorizedHttpError("Не авторизованы.")
+            throw new NonAuthorizedHttpError("Не авторизованы. Причина ошибки: " + xhrObject.responseText)
         } else if (xhrObject.status === 403){
-            throw new ForbiddenHttpError("Нет доступа.");
+            throw new ForbiddenHttpError("Нет доступа. Причина ошибки: " + xhrObject.responseText);
         } else if (xhrObject.status === 404){
-            throw new NotFoundHttpError("Не найдено.");
+            throw new NotFoundHttpError("Не найдено. Причина ошибки: " + xhrObject.responseText);
         } else if (xhrObject.status === 405){
-            throw new MethodNotAllowedHttpError("Метод не разрешен.");
+            throw new MethodNotAllowedHttpError("Метод не разрешен. Причина ошибки: " + xhrObject.responseText);
+        } else if (xhrObject.status === 409){
+            throw new RequestServerDataConflictError("Конфликут запроса и данных на сервере. Причина ошибки: " + xhrObject.responseText)
         } else if (xhrObject.status === 500){
             throw new ServerError("Ошибка сервера.");
         } else {
@@ -63,11 +77,12 @@ class HTTP {
         }
     }
 
-    private request(method: HttpRequestMethods, path: string, queryParams: Record<string, string>, headers: Record<string, string>, body?: Object): Promise<any> {
+    private request(method: HttpRequestMethods, path: string, queryParams: Record<string, string>, headers: Record<string, string>, body?: Object, withCredentials?: boolean): Promise<any> {
         let request = new XMLHttpRequest();
         return new Promise((resolve, reject) => {
             let url = this.constructUrl(path, queryParams);
             request.open(method, url);
+            request.withCredentials = withCredentials || false;
             for(let headerName in headers) {
                 request.setRequestHeader(headerName, headers[headerName]);
             }
@@ -86,24 +101,24 @@ class HTTP {
         });
     }
 
-    get(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}): Promise<string> {
-        return this.request(HttpRequestMethods.GET, path, queryParams, headers);
+    get(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.GET, path, queryParams, headers, withCredentials);
     }
 
-    delete(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}): Promise<string> {
-        return this.request(HttpRequestMethods.DELETE, path, queryParams, headers);
+    delete(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.DELETE, path, queryParams, headers, withCredentials);
     }
 
-    post(path: string, headers: Record<string, string> = {}, body: Record<string, string> = {}): Promise<string> {
-        return this.request(HttpRequestMethods.POST, path, {}, headers, body);
+    post(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, body: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.POST, path, queryParams, headers, body, withCredentials);
     }
 
-    put(path: string, headers: Record<string, string> = {}, body: Record<string, string> = {}): Promise<string> {
-        return this.request(HttpRequestMethods.PUT, path, {}, headers, body);
+    put(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, body: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.PUT, path,  queryParams, headers, body, withCredentials);
     }
 
-    patch(path: string, headers: Record<string, string> = {}, body: Record<string, string> = {}): Promise<string> {
-        return this.request(HttpRequestMethods.PATCH, path, {}, headers, body);
+    patch(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, body: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.PATCH, path, queryParams, headers, body, withCredentials);
     }
 }
 
@@ -111,23 +126,23 @@ class HTTP {
 export default HTTP
 
 
-let request = new HTTP(HTTP.prefixes.HTTP, 'localhost', 8000);
-request.get('/', {id: "1"}, {id: "1"})
-    .then(get_result => console.log(get_result))
-    .catch(error => console.log(error));
-
-request.delete('/', {id: "1"}, {id: "1"})
-    .then(delete_result => console.log(delete_result))
-    .catch(error => console.log(error));
-
-request.post('/', {id: "1"}, {id: "1"})
-    .then(post_result => console.log(post_result))
-    .catch(error => console.log(error));
-
-request.put('/', {id: "1"}, {id: "1"})
-    .then(put_result => console.log(put_result))
-    .catch(error => console.log(error));
-
-request.patch('/', {id: "1"}, {id: "1"})
-    .then(patch_result => console.log(patch_result))
-    .catch(error => console.log(error));
+// let request = new HTTP(HTTP.prefixes.HTTP, 'localhost', 8000, "api/v1/chats");
+// request.get('/', {id: "1"}, {id: "1"})
+//     .then(get_result => console.log(get_result))
+//     .catch(error => console.log(error));
+//
+// request.delete('/', {id: "1"}, {id: "1"})
+//     .then(delete_result => console.log(delete_result))
+//     .catch(error => console.log(error));
+//
+// request.post('/', {id: "1"}, {id: "1"})
+//     .then(post_result => console.log(post_result))
+//     .catch(error => console.log(error));
+//
+// request.put('/', {id: "1"}, {id: "1"})
+//     .then(put_result => console.log(put_result))
+//     .catch(error => console.log(error));
+//
+// request.patch('/', {id: "1"}, {id: "1"})
+//     .then(patch_result => console.log(patch_result))
+//     .catch(error => console.log(error));

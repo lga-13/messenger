@@ -37,9 +37,17 @@ export class MethodNotAllowedHttpError extends Error {
     }
 }
 
+
+export class RequestServerDataConflictError extends Error {
+    constructor(message?: string) {
+        super(message);
+        this.name = "RequestServerDataConflictError";
+    }
+}
+
 export class ServerError extends Error {
     constructor(message?: string) {
         super(message);
-        this.name = "MethodNotAllowedHttpError";
+        this.name = "ServerError";
     }
 }
