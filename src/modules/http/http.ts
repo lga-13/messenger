@@ -53,7 +53,6 @@ class HTTP {
     }
 
     private onLoad(xhrObject: XMLHttpRequest): string{
-        console.log(xhrObject);
         if (xhrObject.status === 200) {
             return xhrObject.responseText
         } else if (xhrObject.status === 204) {
@@ -101,12 +100,12 @@ class HTTP {
         });
     }
 
-    get(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
-        return this.request(HttpRequestMethods.GET, path, queryParams, headers, withCredentials);
+    get(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, body: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.GET, path, queryParams, headers, body, withCredentials);
     }
 
-    delete(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
-        return this.request(HttpRequestMethods.DELETE, path, queryParams, headers, withCredentials);
+    delete(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, body: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
+        return this.request(HttpRequestMethods.DELETE, path, queryParams, headers, body, withCredentials);
     }
 
     post(path: string, queryParams: Record<string, string> = {}, headers: Record<string, string> = {}, body: Record<string, string> = {}, withCredentials?: boolean): Promise<string> {
@@ -124,25 +123,3 @@ class HTTP {
 
 
 export default HTTP
-
-
-// let request = new HTTP(HTTP.prefixes.HTTP, 'localhost', 8000, "api/v1/chats");
-// request.get('/', {id: "1"}, {id: "1"})
-//     .then(get_result => console.log(get_result))
-//     .catch(error => console.log(error));
-//
-// request.delete('/', {id: "1"}, {id: "1"})
-//     .then(delete_result => console.log(delete_result))
-//     .catch(error => console.log(error));
-//
-// request.post('/', {id: "1"}, {id: "1"})
-//     .then(post_result => console.log(post_result))
-//     .catch(error => console.log(error));
-//
-// request.put('/', {id: "1"}, {id: "1"})
-//     .then(put_result => console.log(put_result))
-//     .catch(error => console.log(error));
-//
-// request.patch('/', {id: "1"}, {id: "1"})
-//     .then(patch_result => console.log(patch_result))
-//     .catch(error => console.log(error));
