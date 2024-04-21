@@ -1,9 +1,13 @@
 import HTTP from "../modules/http/http.ts";
 import {BaseAPI} from "./base-api.ts";
 import {SignInData, SignUpData} from "./api-types.ts";
+import {API_DOMAIN, BASE_PATH} from "../../settings.ts";
 
 
-const authAPIInstance = new HTTP(HTTP.prefixes.HTTPS, "ya-praktikum.tech", 80, '/api/v2/auth');
+const authAPIPath = `${BASE_PATH}/auth`
+
+
+const authAPIInstance = new HTTP(HTTP.prefixes.HTTPS, API_DOMAIN, 80, authAPIPath);
 
 
 class SignUpAPI extends BaseAPI {
