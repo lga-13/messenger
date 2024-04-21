@@ -53,6 +53,7 @@ class HTTP {
     }
 
     private onLoad(xhrObject: XMLHttpRequest): string{
+        console.log(xhrObject);
         if (xhrObject.status === 200) {
             return xhrObject.responseText
         } else if (xhrObject.status === 204) {

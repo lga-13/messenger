@@ -45,3 +45,11 @@ export interface UnarchiveChatDataType {
 export interface AvatarChatDataType {
     chatId: string,
 }
+
+export interface ChatUsersGetDataType {
+    id: string,
+    offset: string,
+    limit: string,
+    name: string,
+    email: string
+}
