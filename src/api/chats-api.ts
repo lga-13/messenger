@@ -63,6 +63,22 @@ export class ChatsApi extends BaseAPI {
 
 export class ChatUsersApi extends BaseAPI {
 
+    delete() {
+        return chatAPIInstance.delete(
+            '/users',
+            {},
+            {},
+            {
+                "users": [
+                    290
+                ],
+                "chatId": 2968
+            },
+            true
+        )
+            .catch(error => {throw error});
+    }
+
     request(data: ChatUsersGetDataType) {
         return chatAPIInstance.get(
             `${data.id}/users`,
@@ -112,5 +128,14 @@ console.log(await chatUserApi.request({
     offset: "0",
     name: "",
     email: ""
+    }
+))
+await chatUserApi.delete()
+console.log(await chatUserApi.request({
+        id: 2968,
+        limit: "10",
+        offset: "0",
+        name: "",
+        email: ""
     }
 ))
