@@ -2,6 +2,7 @@ import HTTP from "../modules/http/http.ts";
 import {BaseAPI} from "./base-api.ts";
 import {API_DOMAIN, BASE_PATH} from "../../settings.ts";
 import {
+    AddDeleteUserFromChat,
     ChatCreateDataType,
     ChatsGetDataType,
     ChatUsersGetDataType,
@@ -63,16 +64,14 @@ export class ChatsApi extends BaseAPI {
 
 export class ChatUsersApi extends BaseAPI {
 
-    delete() {
+    delete(data: AddDeleteUserFromChat) {
         return chatAPIInstance.delete(
             '/users',
             {},
             {},
             {
-                "users": [
-                    290
-                ],
-                "chatId": 2968
+                "users": data.users,
+                "chatId": data.chatId
             },
             true
         )
@@ -96,16 +95,14 @@ export class ChatUsersApi extends BaseAPI {
             .catch(error => {throw error});
     }
 
-    replace() {
+    replace(data: AddDeleteUserFromChat) {
         return chatAPIInstance.put(
             "users",
             {},
             {},
             {
-                "users": [
-                    290
-                ],
-                "chatId": 2968
+                "users": data.users,
+                "chatId": data.chatId
             },
             true
         )
@@ -121,7 +118,7 @@ console.log(await chatsApiInstance.request(
         "limit": "10", "offset": "0", "title": ""
     }
 ))
-await chatUserApi.replace()
+await chatUserApi.replace({users: [200], chatId: 2968})
 console.log(await chatUserApi.request({
     id: 2968,
     limit: "10",
@@ -130,7 +127,7 @@ console.log(await chatUserApi.request({
     email: ""
     }
 ))
-await chatUserApi.delete()
+await chatUserApi.delete({users: [200], chatId: 2968})
 console.log(await chatUserApi.request({
         id: 2968,
         limit: "10",

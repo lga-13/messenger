@@ -53,3 +53,8 @@ export interface ChatUsersGetDataType {
     name: string,
     email: string
 }
+
+export interface AddDeleteUserFromChat{
+    users: number[],
+    chatId: number
+}
