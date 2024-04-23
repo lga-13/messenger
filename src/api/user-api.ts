@@ -5,17 +5,44 @@ import {
     UserProfileUpdateDataType,
     UserAvatarUpdateDataType,
     UserPasswordUpdateDataType,
-    UserSearchDataType,
-    ChatsGetDataType
+    UserSearchDataType
 } from "./api-types.ts";
 import * as http from "node:http";
 
 const userAPIPath = `${BASE_PATH}/user`
 
-const userAPIInstance = new HTTP(HTTP.prefixes.HTTPS, API_DOMAIN, 80, userAPIPath);
-console.log(userAPIInstance.host)
+const userAPIInstance = new HTTP(HTTP.prefixes.HTTP, API_DOMAIN, 80, userAPIPath);
+
 
 class UserApi extends BaseAPI {
+
+    getRootData(headers: object) {
+        return userAPIInstance.get(
+            '/',
+            {},
+            headers
+        )
+            .then(response => {
+                return response;
+            })
+            .catch(error => {
+                throw error;
+            });
+    }
+
+    getUserData() {
+        return userAPIInstance.get(
+            '/profile',
+            {},
+            {}
+        )
+            .then(response => {
+                return response;
+            })
+            .catch(error => {
+                throw error;
+            });
+    }
 
     updateProfile(data: UserProfileUpdateDataType) {
         return userAPIInstance.put(
@@ -44,6 +71,7 @@ class UserApi extends BaseAPI {
             '/profile/avatar',
             {},
             {},
+            {withCredentials: true},
             data
         )
             .then(response => {
@@ -61,7 +89,8 @@ class UserApi extends BaseAPI {
             {},
             {
                 "oldPassword": data.oldPassword,
-                "newPassword": data.newPassword
+                "newPassword": data.newPassword,
+                withCredentials: true
             }
         )
             .then(response => {
@@ -90,3 +119,80 @@ class UserApi extends BaseAPI {
     }
 
 }
+const userApi = new UserApi();
+
+// Обновление пароля пользователя
+// const passwordData: UserPasswordUpdateDataType = {
+//     oldPassword: 'oldPassword',
+//     newPassword: 'newPassword'
+// };
+// userApi.updatePassword(passwordData)
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+
+// Поиск пользователей
+// const searchData: UserSearchDataType = {
+//     login: 'user1'
+// };
+//
+// userApi.searchUsers(searchData)
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+
+// const avatarData: UserAvatarUpdateDataType = new FormData();
+// avatarData.append('avatar', 'file');
+//
+// userApi.updateAvatar(avatarData)
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+
+
+
+userApi.getRootData({
+    'accept': '*/*',
+    'cache-control': 'no-cache',
+    'postman-token': 'd9f7e48c-d074-4259-9c90-f2284501ed85'
+})
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+// userApi.getUserData()
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+
+// const data: UserProfileUpdateDataType = {
+//     first_name: 'Иван',
+//     second_name: 'Иванов',
+//     display_name: 'Иван Иванов',
+//     login: 'ivanov',
+//     email: 'ivanov@example.com',
+//     phone: '+79998887766'
+// };
+
+// userApi.updateProfile(data)
+//     .then(response => {
+//         console.log(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });

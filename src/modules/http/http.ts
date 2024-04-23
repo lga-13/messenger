@@ -123,8 +123,3 @@ class HTTP {
 
 
 export default HTTP
-
-
-const http = new HTTP(HTTP.prefixes.HTTPS, "my-api.com", 443, "/api");
-
-console.log(http.host);

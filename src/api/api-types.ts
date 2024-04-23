@@ -31,17 +31,21 @@ export interface UserProfileUpdateDataType {
     login?: string;
     email?: string;
     phone?: string;
+    withCredentials?: boolean;
 }
 
 export interface UserAvatarUpdateDataType {
     avatar: File;
+    withCredentials?: boolean;
 }
 
 export interface UserPasswordUpdateDataType {
     oldPassword: string;
     newPassword: string;
+    withCredentials?: boolean;
 }
 
 export interface UserSearchDataType {
     login: string;
+    withCredentials?: boolean;
 }

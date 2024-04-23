@@ -8,7 +8,7 @@ import {c} from "vite/dist/node/types.d-aGj9QkWt";
 const authAPIPath = `${BASE_PATH}/auth`
 
 
-const authAPIInstance = new HTTP(HTTP.prefixes.HTTPS, API_DOMAIN, 80, authAPIPath);
+const authAPIInstance = new HTTP(HTTP.prefixes.HTTP, API_DOMAIN, 80, authAPIPath);
 
 
 class SignUpAPI extends BaseAPI {
