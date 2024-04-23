@@ -23,3 +23,25 @@ export interface ChatsGetDataType {
 export interface ChatCreateDataType {
     title: string,
 }
+
+export interface UserProfileUpdateDataType {
+    first_name?: string;
+    second_name?: string;
+    display_name?: string;
+    login?: string;
+    email?: string;
+    phone?: string;
+}
+
+export interface UserAvatarUpdateDataType {
+    avatar: File;
+}
+
+export interface UserPasswordUpdateDataType {
+    oldPassword: string;
+    newPassword: string;
+}
+
+export interface UserSearchDataType {
+    login: string;
+}
