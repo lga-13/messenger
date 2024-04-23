@@ -1,8 +1,6 @@
 import HTTP from "../modules/http/http.ts";
-import {BaseAPI} from "./base-api.ts";
+import {API_DOMAIN, BASE_PATH, BaseAPI} from "./base-api.ts";
 import {SignInDataType, SignUpDataType} from "./api-types.ts";
-import {API_DOMAIN, BASE_PATH} from "../../settings.ts";
-import {c} from "vite/dist/node/types.d-aGj9QkWt";
 
 
 const authAPIPath = `${BASE_PATH}/auth`
@@ -98,10 +96,11 @@ class LogoutAPI extends BaseAPI {
 }
 
 
-const userApiInstance = new UserAPI();
-const logoutApiInstance = new LogoutAPI();
-const loginApiInstance = new SignInAPI();
-const signupApiInstance = new SignUpAPI();
+export const userApiInstance = new UserAPI();
+export const logoutApiInstance = new LogoutAPI();
+export const loginApiInstance = new SignInAPI();
+export const signupApiInstance = new SignUpAPI();
+
 
 // signupApiInstance.create({
 //     first_name: "Gleb",
@@ -112,4 +111,4 @@ const signupApiInstance = new SignUpAPI();
 //     phone: "88005553535"
 // })
 
-console.log(await userApiInstance.request())
+// console.log(await userApiInstance.request())

@@ -1,6 +1,5 @@
 import HTTP from "../modules/http/http.ts";
-import {BaseAPI} from "./base-api.ts";
-import {API_DOMAIN, BASE_PATH} from "../../settings.ts";
+import {API_DOMAIN, BASE_PATH, BaseAPI} from "./base-api.ts";
 import {
     AddDeleteUserFromChat,
     ChatCreateDataType,
@@ -113,26 +112,3 @@ export class ChatUsersApi extends BaseAPI {
 
 const chatsApiInstance = new  ChatsApi();
 const chatUserApi = new ChatUsersApi()
-console.log(await chatsApiInstance.request(
-    {
-        "limit": "10", "offset": "0", "title": ""
-    }
-))
-await chatUserApi.replace({users: [200], chatId: 2968})
-console.log(await chatUserApi.request({
-    id: 2968,
-    limit: "10",
-    offset: "0",
-    name: "",
-    email: ""
-    }
-))
-await chatUserApi.delete({users: [200], chatId: 2968})
-console.log(await chatUserApi.request({
-        id: 2968,
-        limit: "10",
-        offset: "0",
-        name: "",
-        email: ""
-    }
-))

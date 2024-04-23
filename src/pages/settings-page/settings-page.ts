@@ -14,6 +14,7 @@ import avatar from '../../public/static/img/avatar.svg';
 import { UserInfoCard } from '../../blocks/user_info_card/user_info_card.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
 import Title from '../../components/title/title.ts';
+import {logoutApiInstance} from "../../api/auth-api.ts";
 
 export interface userDataInterface {
   login: string,
@@ -384,6 +385,11 @@ class SettingsPage extends Block<SettingPageProps> {
         href: '/',
         text: 'Выйти из аккаунта',
         settings: { withInternalID: true },
+        events: {
+          onClick: () => {
+            logoutApiInstance.create()
+          }
+        }
       },
     );
 

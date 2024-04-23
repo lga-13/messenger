@@ -5,6 +5,8 @@ import Form from '../../blocks/form/form.ts';
 import { ErrorMessages, Validator } from '../../validators/field_validator.ts';
 import Block from '../../components/base/block.ts';
 import greetings from './login_form-template.ts';
+import {router} from "../../app.ts";
+import {loginApiInstance} from "../../api/auth-api.ts";
 
 export interface LoginFormBlockType {}
 
@@ -34,8 +36,7 @@ class LoginForm extends Block<LoginFormBlockType> {
             click: () => {
               if (loginForm.validate()) {
                 const data = loginForm.get_data();
-                console.log(data);
-                loginForm.clear();
+                loginApiInstance.create(data).then((response) => {router.go('/messenger')})
               }
             },
           },

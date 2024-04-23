@@ -6,7 +6,7 @@ import Error500Page from './pages/error500/error500.ts';
 import RegistrationForm from './pages/registration-form/registration-form.ts';
 import LoginForm from './pages/login-form/login-form.ts';
 
-const router = new Router('#app')
+export const router = new Router('#app')
   .use('/404', new Error404Page({}))
   .use('/500', new Error500Page({}))
   .use('/settings', new SettingsPage({}))
